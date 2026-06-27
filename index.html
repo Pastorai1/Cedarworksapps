@@ -4,257 +4,453 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cedar Works Apps — Practical AI apps, built to do real work</title>
-  <meta name="description" content="Cedar Works Apps is a small studio that builds practical, AI-powered apps. Makers of PastorAI and Ready Room." />
+  <meta name="description" content="Cedar Works Apps is a small studio building practical AI apps — focused tools for the people who use them every day. Makers of PastorAI and Ready Room." />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Cedar Works Apps" />
   <meta property="og:description" content="Practical AI apps, built to do real work." />
   <meta property="og:type" content="website" />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #fbfaf8;
-      --surface: #ffffff;
-      --ink: #1f2421;
-      --ink-soft: #51605a;
-      --line: #e7e3dc;
-      --cedar: #4a6b53;
-      --cedar-deep: #36513e;
-      --accent: #b06a3b;
-      --shadow: 0 1px 2px rgba(31, 36, 33, 0.04), 0 12px 32px rgba(31, 36, 33, 0.06);
-      --radius: 16px;
-      --maxw: 880px;
+      --green-deep: #143d28;
+      --green-hero-a: #1f5236;
+      --green-hero-b: #123a26;
+      --green-footer: #163a26;
+      --green-btn: #14331f;
+      --green-ink: #1f3a29;
+      --green-bold: #2c5740;
+      --cream: #f4ebd5;
+      --sage: #b3c1ab;
+      --orange: #d98b3c;
+      --orange-deep: #c47e34;
+      --tan: #ece1c7;
+      --tan-line: #d3c5a3;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --container: 1180px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--sans);
+      color: var(--green-ink);
+      background: var(--tan);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    a { color: inherit; }
+    a { color: inherit; text-decoration: none; }
 
-    .wrap {
+    .container {
       width: 100%;
-      max-width: var(--maxw);
+      max-width: var(--container);
       margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header */
-    header {
-      text-align: center;
-      padding: 88px 0 56px;
-      border-bottom: 1px solid var(--line);
-      background:
-        radial-gradient(900px 360px at 50% -120px, rgba(74, 107, 83, 0.10), transparent 70%);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      background: linear-gradient(150deg, var(--cedar), var(--cedar-deep));
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin: 0;
-      font-weight: 700;
-    }
-
-    .tagline {
-      margin: 16px auto 0;
-      max-width: 540px;
-      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-      color: var(--ink-soft);
-    }
-
-    /* Products */
-    main {
-      padding: 56px 0 24px;
+      padding: 0 40px;
     }
 
     .eyebrow {
-      text-align: center;
+      font-family: var(--sans);
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.22em;
+      font-weight: 700;
       font-size: 0.78rem;
+      color: var(--orange);
+      margin: 0;
+    }
+
+    .eyebrow.dash::before {
+      content: "";
+      display: inline-block;
+      width: 22px;
+      height: 2px;
+      background: var(--orange);
+      vertical-align: middle;
+      margin-right: 14px;
+      margin-bottom: 4px;
+    }
+
+    /* ---------- Dark zone: header + hero ---------- */
+    .dark {
+      position: relative;
+      color: var(--cream);
+      background:
+        radial-gradient(1100px 620px at 50% -60px, var(--green-hero-a), transparent 70%),
+        linear-gradient(180deg, var(--green-hero-b), var(--green-deep));
+      overflow: hidden;
+      border-bottom: 5px solid var(--orange-deep);
+    }
+    .dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 46px);
+      pointer-events: none;
+    }
+
+    /* Header / nav */
+    .site-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 34px 0 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo .mark {
+      width: 46px;
+      height: 46px;
+      flex: none;
+      border-radius: 50%;
+      border: 2px solid var(--orange);
+      display: grid;
+      place-items: center;
+    }
+    .logo .mark svg { width: 22px; height: 22px; }
+    .logo .word {
+      font-family: var(--sans);
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      font-size: 0.82rem;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 42px;
+    }
+    .nav-links a {
       font-weight: 600;
-      color: var(--accent);
-      margin: 0 0 36px;
+      letter-spacing: 0.16em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--cream);
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+    .nav-links a:hover { border-color: var(--orange); color: #fff; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 92px 0 72px;
+    }
+    .hero .eyebrow { margin-bottom: 30px; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      color: var(--cream);
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      margin: 0 auto;
+      max-width: 20ch;
+    }
+    .hero h1 .accent { color: var(--orange); }
+
+    .hero-sub {
+      max-width: 620px;
+      margin: 30px auto 0;
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      color: var(--sage);
+      line-height: 1.55;
     }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 36px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow);
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      margin-top: 56px;
+      flex-wrap: wrap;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(244, 235, 213, 0.55);
     }
+    .hero-meta .rule {
+      width: 70px;
+      height: 1px;
+      background: rgba(244, 235, 213, 0.35);
+    }
+    .hero-meta a { color: rgba(244, 235, 213, 0.7); }
+    .hero-meta a:hover { color: var(--cream); }
 
-    .card-head {
+    /* ---------- Workshop ---------- */
+    .workshop { padding: 96px 0 40px; }
+
+    .section-head {
       display: flex;
       align-items: baseline;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
+      justify-content: space-between;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--tan-line);
+      margin-bottom: 4px;
     }
-
-    .card h2 {
-      font-size: clamp(1.4rem, 3vw, 1.8rem);
-      letter-spacing: -0.01em;
+    .section-head h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      color: var(--green-ink);
       margin: 0;
-      font-weight: 700;
+    }
+    .section-head .count {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(31, 58, 41, 0.55);
     }
 
-    .card-kicker {
-      font-size: 0.85rem;
-      color: var(--ink-soft);
+    .app {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 48px;
+      padding: 72px 0;
+      border-bottom: 1px solid var(--tan-line);
     }
+    .app:last-of-type { border-bottom: none; }
 
-    .card p {
+    .app-id .eyebrow { margin-bottom: 22px; }
+    .app-id h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1;
+      color: var(--green-ink);
       margin: 0 0 14px;
-      color: var(--ink-soft);
+    }
+    .app-id .who {
       font-size: 1.05rem;
+      color: rgba(31, 58, 41, 0.7);
+      margin: 0;
     }
 
-    .card p:last-of-type { margin-bottom: 26px; }
+    .app-copy p {
+      margin: 0 0 22px;
+      font-size: 1.15rem;
+      color: rgba(31, 58, 41, 0.88);
+      line-height: 1.6;
+    }
+    .app-copy p strong { color: var(--green-bold); font-weight: 700; }
 
-    .closing-line {
+    .quote {
+      border-left: 3px solid var(--orange);
+      padding: 4px 0 4px 22px;
+      margin: 0 0 26px;
+      font-family: var(--serif);
       font-style: italic;
-      color: var(--ink);
+      font-size: 1.32rem;
+      color: var(--green-ink);
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--cedar);
-      color: #fff;
-      text-decoration: none;
+      gap: 12px;
+      background: var(--green-btn);
+      color: var(--cream);
       font-weight: 600;
-      font-size: 1rem;
-      padding: 13px 24px;
-      border-radius: 11px;
-      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: var(--shadow);
+      font-size: 1.02rem;
+      padding: 17px 30px;
+      border-radius: 4px;
+      transition: background 0.18s ease, transform 0.18s ease;
     }
-
-    .btn:hover {
-      background: var(--cedar-deep);
-      transform: translateY(-1px);
-    }
-
-    .btn:focus-visible {
-      outline: 3px solid rgba(74, 107, 83, 0.4);
-      outline-offset: 2px;
-    }
-
+    .btn:hover { background: #0f2917; transform: translateY(-1px); }
     .btn .arrow { transition: transform 0.18s ease; }
-    .btn:hover .arrow { transform: translateX(3px); }
+    .btn:hover .arrow { transform: translateX(4px); }
+    .btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
-    /* Footer */
+    /* ---------- Footer ---------- */
     footer {
-      text-align: center;
-      padding: 48px 0 56px;
-      border-top: 1px solid var(--line);
-      color: var(--ink-soft);
+      background: var(--green-footer);
+      color: var(--cream);
+      border-top: 5px solid var(--orange-deep);
+      padding: 46px 0;
+    }
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-row .logo .word { color: var(--cream); }
+    .footer-row .mark { width: 40px; height: 40px; }
+    .footer-row .mark svg { width: 19px; height: 19px; }
+    .copyright {
       font-size: 0.92rem;
-      margin-top: 24px;
+      color: rgba(244, 235, 213, 0.65);
     }
 
-    footer .foot-brand {
-      font-weight: 600;
-      color: var(--ink);
+    /* ---------- Responsive ---------- */
+    @media (max-width: 820px) {
+      .container { padding: 0 24px; }
+      .nav-links { gap: 22px; }
+      .app {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 56px 0;
+      }
+      .app-copy p { font-size: 1.06rem; }
     }
-
     @media (max-width: 560px) {
-      header { padding: 64px 0 44px; }
-      .card { padding: 26px; }
+      .nav-links { display: none; }
+      .hero { padding: 64px 0 56px; }
+      .workshop { padding: 64px 0 24px; }
+      .section-head { flex-direction: column; gap: 8px; align-items: flex-start; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">🌲</span>
-        <h1>Cedar Works Apps</h1>
+  <!-- Header + Hero (dark) -->
+  <div class="dark">
+    <div class="container">
+      <div class="site-nav">
+        <a class="logo" href="#top" id="top">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d98b3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22V8" />
+              <path d="M12 8c0-2.5 1.6-4.2 4-4.5C16 6 14.4 7.8 12 8Z" />
+              <path d="M12 8c0-2.5-1.6-4.2-4-4.5C8 6 9.6 7.8 12 8Z" />
+              <path d="M12 13c0-2.2 1.5-3.7 3.6-4C15.6 11.3 14.1 12.8 12 13Z" />
+              <path d="M12 13c0-2.2-1.5-3.7-3.6-4C8.4 11.3 9.9 12.8 12 13Z" />
+              <path d="M12 18c0-2 1.4-3.4 3.3-3.7C15.3 16.4 13.9 17.8 12 18Z" />
+              <path d="M12 18c0-2-1.4-3.4-3.3-3.7C8.7 16.4 10.1 17.8 12 18Z" />
+            </svg>
+          </span>
+          <span class="word">Cedar Works<br>Apps</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#pastorai">PastorAI</a>
+          <a href="#readyroom">Ready Room</a>
+        </nav>
       </div>
-      <p class="tagline">Practical AI apps, built to do real work.</p>
-    </div>
-  </header>
 
-  <main class="wrap">
-    <p class="eyebrow">Our Apps</p>
+      <section class="hero">
+        <p class="eyebrow">A small studio building practical AI apps</p>
+        <h1>Practical AI apps,<br>built to do <span class="accent">real work.</span></h1>
+        <p class="hero-sub">
+          Cedar Works Apps designs and builds focused tools for the people who
+          use them every day — no fluff, just software that earns its keep.
+        </p>
+        <div class="hero-meta">
+          <span>Two apps, ready to use &amp; more apps coming soon</span>
+          <span class="rule" aria-hidden="true"></span>
+          <a href="#workshop">See them below</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Workshop (light) -->
+  <main class="workshop container" id="workshop">
+    <div class="section-head">
+      <h2>The workshop</h2>
+      <span class="count">Two apps</span>
+    </div>
 
     <!-- PastorAI -->
-    <article class="card">
-      <div class="card-head">
-        <h2>PastorAI</h2>
-        <span class="card-kicker">AI tools for ministry</span>
+    <section class="app" id="pastorai">
+      <div class="app-id">
+        <p class="eyebrow dash">Ministry software</p>
+        <h3>PastorAI</h3>
+        <p class="who">For pastors &amp; church staff</p>
       </div>
-      <p>
-        A suite of AI-powered tools that help pastors and church staff with
-        sermon prep, study, devotionals, and everyday ministry work.
-      </p>
-      <a class="btn" href="https://pastorai.io" target="_blank" rel="noopener">
-        Visit PastorAI <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </article>
+      <div class="app-copy">
+        <p>
+          A suite of AI-powered tools that help pastors and church staff carry
+          the week — <strong>sermon and series planning, Bible study,
+          devotionals, children's ministry, social media, and translation</strong>,
+          all gathered into one place.
+        </p>
+        <p>
+          Instead of juggling a dozen tabs and starting every task from a blank
+          page, a pastor opens one tool and gets a running start on the work
+          that fills a ministry week — then shapes it in their own voice.
+        </p>
+        <p>
+          Built for ministry first: the kind of help that lightens the load
+          without ever standing in for the person doing it. Less time on the
+          busywork, more time with people.
+        </p>
+        <a class="btn" href="https://pastorai.io" target="_blank" rel="noopener">
+          Visit PastorAI <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
 
     <!-- Ready Room -->
-    <article class="card">
-      <div class="card-head">
-        <h2>Ready Room</h2>
-        <span class="card-kicker">A flight simulator for sales calls</span>
+    <section class="app" id="readyroom">
+      <div class="app-id">
+        <p class="eyebrow dash">Sales training</p>
+        <h3>Ready Room</h3>
+        <p class="who">For reps &amp; closers</p>
       </div>
-      <p>
-        A flight simulator for sales calls. Rehearse your pitch on an AI that
-        plays a realistic, often skeptical prospect — one that talks back out
-        loud and reacts to how you sell. Drill the two skills that win deals:
-        discovery (the questions that uncover what a prospect actually wants)
-        and objection-handling (price, timing, and trust). Train at easy,
-        medium, and hard levels, then get every session graded by an AI coach
-        that shows what worked, what cost you the deal, and exactly what to fix
-        next. Voice-first, with typing whenever you prefer.
-      </p>
-      <p class="closing-line">The best closers aren't born. They're rehearsed.</p>
-      <a class="btn" href="https://tryreadyroom.com" target="_blank" rel="noopener">
-        Visit Ready Room <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </article>
+      <div class="app-copy">
+        <p>
+          A flight simulator for sales calls. Rehearse your pitch on an AI that
+          plays a realistic, often skeptical prospect — one that <strong>talks
+          back out loud and reacts to how you sell.</strong> Ask sharp,
+          low-pressure questions and it opens up; push too hard and it shuts
+          down, just like real life.
+        </p>
+        <p>
+          Drill the two skills that win deals: <strong>discovery</strong> — the
+          questions that uncover what a prospect actually wants — and
+          <strong>objection-handling</strong> on price, timing, and trust.
+          Train at easy, medium, and hard levels, then get every session graded
+          by an AI coach that shows what worked, what cost you the deal, and
+          exactly what to fix next. Voice-first, with typing whenever you prefer.
+        </p>
+        <blockquote class="quote">The best closers aren't born. They're rehearsed.</blockquote>
+        <a class="btn" href="https://tryreadyroom.com" target="_blank" rel="noopener">
+          Visit Ready Room <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <div class="wrap">
-      <span class="foot-brand">Cedar Works Apps</span> &copy; <span id="year"></span>
+    <div class="container footer-row">
+      <span class="logo">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d98b3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22V8" />
+            <path d="M12 8c0-2.5 1.6-4.2 4-4.5C16 6 14.4 7.8 12 8Z" />
+            <path d="M12 8c0-2.5-1.6-4.2-4-4.5C8 6 9.6 7.8 12 8Z" />
+            <path d="M12 13c0-2.2 1.5-3.7 3.6-4C15.6 11.3 14.1 12.8 12 13Z" />
+            <path d="M12 13c0-2.2-1.5-3.7-3.6-4C8.4 11.3 9.9 12.8 12 13Z" />
+            <path d="M12 18c0-2 1.4-3.4 3.3-3.7C15.3 16.4 13.9 17.8 12 18Z" />
+            <path d="M12 18c0-2-1.4-3.4-3.3-3.7C8.7 16.4 10.1 17.8 12 18Z" />
+          </svg>
+        </span>
+        <span class="word">Cedar Works Apps</span>
+      </span>
+      <span class="copyright">&copy; <span id="year"></span> Cedar Works Apps. All rights reserved.</span>
     </div>
   </footer>
 
