@@ -1,8 +1,8 @@
-# Cedar Works Apps
+# Cedarworks Apps
 
 A small studio that builds practical, AI-powered apps.
 
-This repository contains the Cedar Works Apps one-page website — a single,
+This repository contains the Cedarworks Apps one-page website — a single,
 self-contained `index.html` (HTML + embedded CSS, no build step) that
 showcases our products:
 
