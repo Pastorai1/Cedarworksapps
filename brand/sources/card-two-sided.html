@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cedarworks Apps — Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green-deep: #143d28;
+    --green-hero-a: #1f5236;
+    --green-hero-b: #123a26;
+    --green-ink: #1f3a29;
+    --cream: #f4ebd5;
+    --sage: #b3c1ab;
+    --orange: #d98b3c;
+    --orange-deep: #c47e34;
+    --tan: #ece1c7;
+    --tan-line: #c9ba95;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #6b6b6b;
+    font-family: var(--sans);
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  /* Card = 3.5in x 2in trim + 0.125in bleed all around = 3.75 x 2.25in.
+     Scale: 100px per inch → bleed 375x225, trim 350x200. */
+  .bleed {
+    width: 375px;
+    height: 225px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .safe {
+    position: absolute;
+    inset: 0;
+    padding: 30px 32px;   /* ~0.18in inside trim, comfortable safe zone */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------------- FRONT (brand) ---------------- */
+  .front {
+    color: var(--cream);
+    background:
+      radial-gradient(520px 300px at 50% -40px, var(--green-hero-a), transparent 70%),
+      linear-gradient(180deg, var(--green-hero-b), var(--green-deep));
+  }
+  .front::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 34px);
+  }
+  .front .safe {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+  }
+  .mark {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    display: grid; place-items: center;
+  }
+  .mark svg { width: 23px; height: 23px; }
+  .front .wordmark {
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 16px;
+    color: var(--cream);
+  }
+  .front .rule {
+    width: 34px; height: 2px;
+    background: var(--orange);
+    margin: 13px 0;
+  }
+  .front .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 12.5px;
+    color: var(--sage);
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------------- BACK (contact) ---------------- */
+  .back {
+    background: var(--tan);
+    color: var(--green-ink);
+  }
+  .back .safe { justify-content: space-between; }
+  .back .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .back .eyebrow {
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    font-size: 8.5px;
+    color: var(--orange-deep);
+    margin-bottom: 8px;
+  }
+  .back .name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 1;
+    color: var(--green-ink);
+  }
+  .back .mark {
+    width: 34px; height: 34px;
+    border-color: var(--orange-deep);
+  }
+  .back .mark svg { width: 17px; height: 17px; }
+
+  .contact { display: flex; flex-direction: column; gap: 9px; }
+  .contact .row {
+    display: flex; align-items: center; gap: 11px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green-ink);
+    letter-spacing: 0.01em;
+  }
+  .contact .ico {
+    width: 15px; height: 15px; flex: none;
+    color: var(--orange-deep);
+    display: grid; place-items: center;
+  }
+  .contact .ico svg { width: 15px; height: 15px; }
+
+  /* trim guide (screen only, not part of art) */
+  .label { color: #eee; font-size: 13px; font-weight: 600; margin-bottom: 10px; letter-spacing: .04em; }
+  .stack { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div class="label">FRONT</div>
+    <div class="bleed front" id="front">
+      <div class="safe">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d98b3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22V8" />
+            <path d="M12 8c0-2.5 1.6-4.2 4-4.5C16 6 14.4 7.8 12 8Z" />
+            <path d="M12 8c0-2.5-1.6-4.2-4-4.5C8 6 9.6 7.8 12 8Z" />
+            <path d="M12 13c0-2.2 1.5-3.7 3.6-4C15.6 11.3 14.1 12.8 12 13Z" />
+            <path d="M12 13c0-2.2-1.5-3.7-3.6-4C8.4 11.3 9.9 12.8 12 13Z" />
+            <path d="M12 18c0-2 1.4-3.4 3.3-3.7C15.3 16.4 13.9 17.8 12 18Z" />
+            <path d="M12 18c0-2-1.4-3.4-3.3-3.7C8.7 16.4 10.1 17.8 12 18Z" />
+          </svg>
+        </span>
+        <div class="wordmark">Cedarworks Apps</div>
+        <div class="rule"></div>
+        <div class="tagline">Practical AI apps, built to do real work.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stack">
+    <div class="label">BACK</div>
+    <div class="bleed back" id="back">
+      <div class="safe">
+        <div class="top">
+          <div>
+            <div class="eyebrow">Cedarworks Apps</div>
+            <div class="name">James Chambers</div>
+          </div>
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c47e34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22V8" />
+              <path d="M12 8c0-2.5 1.6-4.2 4-4.5C16 6 14.4 7.8 12 8Z" />
+              <path d="M12 8c0-2.5-1.6-4.2-4-4.5C8 6 9.6 7.8 12 8Z" />
+              <path d="M12 13c0-2.2 1.5-3.7 3.6-4C15.6 11.3 14.1 12.8 12 13Z" />
+              <path d="M12 13c0-2.2-1.5-3.7-3.6-4C8.4 11.3 9.9 12.8 12 13Z" />
+              <path d="M12 18c0-2 1.4-3.4 3.3-3.7C15.3 16.4 13.9 17.8 12 18Z" />
+              <path d="M12 18c0-2-1.4-3.4-3.3-3.7C8.7 16.4 10.1 17.8 12 18Z" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="contact">
+          <div class="row">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            james@cedarworksapps.com
+          </div>
+          <div class="row">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.9.36 1.78.68 2.62a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.46-1.25a2 2 0 0 1 2.11-.45c.84.32 1.72.55 2.62.68A2 2 0 0 1 22 16.92Z"/></svg></span>
+            417-370-2084
+          </div>
+          <div class="row">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20"/></svg></span>
+            cedarworksapps.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
