@@ -39,7 +39,7 @@ async function icon(name, color) {
     ic[n] = { o: await icon(n, ORANGE), g: await icon(n, GREEN), c: await icon(n, CREAM) };
   }
 
-  const TOTAL = 16;
+  const TOTAL = 18;
   let num = 0;
 
   // Brand motif: icon inside an orange-outlined circle (mirrors the logo mark)
@@ -135,9 +135,9 @@ async function icon(name, color) {
     eyebrow(s, "Problem Statement  ·  Customer pain points");
     title(s, "Generic AI doesn't fit how pastors and reps work");
     const rows = [
-      ["LuClock", "Pastors are overloaded", "Sermons, Bible studies, devotionals, kids' ministry, social posts and translation fill the week, often for a pastor with little or no staff. Most of it starts from a blank page."],
-      ["LuTarget", "Sales reps practice on real prospects", "Discovery and objection-handling are learned live, on the calls that matter. Every fumbled objection costs a deal and a commission."],
-      ["LuBrain", "General chatbots don't close the gap", "A blank chat box doesn't know the workflow, the vocabulary or what 'good' looks like, so people spend more time prompting than working."],
+      ["LuClock", "Pastors are overloaded", "Sermons, studies, devotionals, kids' lessons, social posts and translation fill the week, often with little or no staff. 42% of U.S. pastors considered quitting full-time ministry in the past year (Barna Group, 2022)."],
+      ["LuTarget", "Sales reps practice on real prospects", "Discovery and objection-handling are learned live, on the calls that matter. One fumbled objection can cost a deal worth thousands in commission."],
+      ["LuBrain", "General chatbots don't close the gap", "Existing options fall short: chatbots don't know the workflow or vocabulary, and sales-training platforms are priced and sold for enterprise teams."],
     ];
     rows.forEach(([n, h, b], i) => {
       const y = 1.65 + i * 0.84;
@@ -177,22 +177,32 @@ async function icon(name, color) {
     s.addNotes("We don't build one app for everyone. We build many small apps that each serve one audience extremely well. That keeps each product simple and lets us reuse our technology across the portfolio.");
   }
 
+  // App screenshots (recreated from the live apps; sources in pitch-deck/*.html)
+  const fs = require("fs"), path = require("path");
+  const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f)).toString("base64");
+  function appShot(s, file, x, y, w, h) {
+    s.addShape(pres.shapes.RECTANGLE, { x: x - 0.03, y: y - 0.03, w: w + 0.06, h: h + 0.06, fill: { color: TAN }, line: { color: TAN },
+      shadow: { type: "outer", color: "000000", opacity: 0.15, blur: 8, offset: 3, angle: 90 } });
+    s.addImage({ data: shot(file), x, y, w, h });
+  }
+
   // ---------- 5. PastorAI ----------
   {
     const s = light();
     eyebrow(s, "Solution & Product  ·  PastorAI  ·  pastorai.io");
     title(s, "PastorAI: an AI ministry assistant for the whole week");
-    card(s, 0.5, 1.6, 5.3, 3.4);
-    T(s, "Features", { x: 0.8, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
-    const feats = ["Sermon and sermon-series planning", "Bible study and devotional writing", "Children's ministry lessons",
-      "Church social media content", "Translation for multilingual congregations", "Output shaped to the pastor's own voice"];
-    T(s, bullets(feats), { x: 0.8, y: 2.12, w: 4.8, h: 2.0, fontSize: 13.5, paraSpaceAfter: 4 });
-    T(s, "“This will save me so much time. It's a great tool.”  — Pastor Dennis, trial user", {
-      x: 0.8, y: 4.3, w: 4.8, h: 0.55, fontFace: HEAD, italic: true, fontSize: 12, color: GREEN });
-    const stats = [["$47", "per month subscription"], ["~15", "trial members"], ["iOS · Android · Web", "live in both app stores"]];
-    stats.forEach(([big, small], i) => statCard(s, 6.1, 1.6 + i * 1.17, 3.4, 1.0, big, small, i === 0, i === 2 ? 17 : 28));
+    appShot(s, "pastorai-dashboard.png", 0.5, 1.62, 3.6, 3.37);
+    card(s, 4.35, 1.6, 3.0, 3.4);
+    T(s, "Features", { x: 4.58, y: 1.75, w: 2.6, h: 0.26, fontSize: 11, bold: true, color: ORANGE });
+    const feats = ["Sermon Builder: full outlines with scripture", "Series Planner: multi-week series", "Bible Study: small-group guides",
+      "Social media: 7 days of posts per sermon", "Devotionals and children's lessons", "Translation into 10 languages", "Sermon rehearsal"];
+    T(s, bullets(feats), { x: 4.58, y: 2.04, w: 2.62, h: 2.2, fontSize: 11, paraSpaceAfter: 3 });
+    T(s, "\u201CThis will save me so much time. It's a great tool.\u201D \u2014 Pastor Dennis, trial user", {
+      x: 4.58, y: 4.3, w: 2.62, h: 0.6, fontFace: HEAD, italic: true, fontSize: 10.5, color: GREEN });
+    const stats = [["$47", "per month, free trial first"], ["~15", "trial members"], ["3", "platforms: iOS · Android · web"]];
+    stats.forEach(([big, small], i) => statCard(s, 7.55, 1.6 + i * 1.2, 1.95, 1.05, big, small, i === 0, 26));
     footer(s);
-    s.addNotes("PastorAI puts the tools that fill a pastor's week in one place. It's live on iOS, Android and the web at $47 a month, with about 15 trial members. One of them, Pastor Dennis, told us: 'This will save me so much time. It's a great tool.'");
+    s.addNotes("This is the PastorAI dashboard. Every tool a pastor needs for the week is one click away: Sermon Builder, Series Planner, Bible Study, Social Media, Devotional, Children's Lesson, Translation into 10 languages, and a Rehearsal tool. It's live on iOS, Android and the web at $47 a month after a free trial, with about 15 trial members. One of them, Pastor Dennis, told us: 'This will save me so much time. It's a great tool.'");
   }
 
   // ---------- 6. Ready Room ----------
@@ -200,41 +210,39 @@ async function icon(name, color) {
     const s = light();
     eyebrow(s, "Solution & Product  ·  Ready Room  ·  tryreadyroom.com");
     title(s, "Ready Room: a flight simulator for sales calls");
-    const stats = [["$29", "per month subscription"], ["~15", "trial members"], ["iOS · Android · Web", "live in both app stores"]];
-    stats.forEach(([big, small], i) => statCard(s, 0.5, 1.6 + i * 1.17, 3.4, 1.0, big, small, i === 0, i === 2 ? 17 : 28));
-    card(s, 4.2, 1.6, 5.3, 3.4);
-    T(s, "How it works", { x: 4.5, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
-    const feats = ["A voice AI plays a realistic, often skeptical prospect", "It reacts to how you sell: warms up to good questions, shuts down when pushed",
-      "Drills discovery and objections on price, timing and trust", "Easy, medium and hard levels",
-      "An AI coach grades every session and says what to fix next"];
-    T(s, bullets(feats), { x: 4.5, y: 2.12, w: 4.8, h: 2.2, fontSize: 13, paraSpaceAfter: 4 });
-    T(s, "Designed by a founder with 40+ years in sales.", {
-      x: 4.5, y: 4.45, w: 4.8, h: 0.4, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
+    const stats = [["$29", "per month, free trial first"], ["~15", "trial members"], ["3", "platforms: iOS · Android · web"]];
+    stats.forEach(([big, small], i) => statCard(s, 0.5, 1.6 + i * 1.2, 1.95, 1.05, big, small, i === 0, 26));
+    card(s, 2.65, 1.6, 3.0, 3.4);
+    T(s, "Features", { x: 2.88, y: 1.75, w: 2.6, h: 0.26, fontSize: 11, bold: true, color: ORANGE });
+    const feats = ["Voice AI prospect that talks back and reacts to how you sell", "Discovery and objection drills at easy, medium and hard",
+      "18+ ready-made prospects, from roofing to SaaS", "Score real calls: record live, upload a recording or paste a transcript",
+      "AI coach scorecard after every session"];
+    T(s, bullets(feats), { x: 2.88, y: 2.04, w: 2.62, h: 2.4, fontSize: 11, paraSpaceAfter: 3 });
+    T(s, "Built on 40+ years of the founder's sales experience.", {
+      x: 2.88, y: 4.45, w: 2.62, h: 0.45, fontFace: HEAD, italic: true, fontSize: 10.5, color: GREEN });
+    appShot(s, "readyroom-app.png", 5.9, 1.62, 3.6, 3.37);
     footer(s);
-    s.addNotes("Ready Room lets sales reps rehearse on an AI prospect that talks back out loud. They practice discovery and objection-handling, then get graded by an AI coach. It's live on iOS, Android and the web at $29 a month, with about 15 trial members. It's built on what I learned in 40 years of selling.");
+    s.addNotes("This is Ready Room. A rep picks a prospect from 18+ industry scenarios, chooses a discovery or objection drill and a difficulty, then sells out loud to a voice AI prospect that reacts to how they sell. Reps can also score their real calls by recording live, uploading a recording, or pasting a transcript. An AI coach grades every session. It's live on iOS, Android and the web at $29 a month after a free trial, with about 15 trial members. It's built on what I learned in 40 years of selling.");
   }
 
   // ---------- 7. AppForge ----------
   {
     const s = dark();
     eyebrow(s, "Solution & Product  ·  AppForge");
-    title(s, "AppForge: our in-house system for finding and building the next app", true);
-    const steps = [["LuSearch", "1  Analyze", "Scans the market for underserved niches with real demand and willingness to pay"],
-      ["LuTarget", "2  Select", "Scores ideas on demand, competition and fit, and picks the strongest"],
-      ["LuHammer", "3  Build", "Reuses the proven Cedarworks stack of AI, voice, billing and app-store shells"],
-      ["LuRocket", "4  Launch", "Ships to iOS, Android and web with trials and subscriptions ready on day one"]];
+    title(s, "AppForge: our engine for finding and building apps", true);
+    appShot(s, "appforge-app.png", 0.5, 1.62, 3.6, 3.37);
+    const steps = [["LuSearch", "1  Analyze", "Top 100 Apps, Market Analysis and Opportunities find underserved niches with proven demand"],
+      ["LuTarget", "2  Score & select", "App Types and the Viability Scorer rank ideas on demand, competition and fit"],
+      ["LuHammer", "3  Build", "Tech Stack, Projects and Build reuse the Cedarworks stack of AI, voice and billing"],
+      ["LuRocket", "4  Launch & market", "Store Listing, plus one-to-many emails, social posts, ads and presentations"]];
     steps.forEach(([n, h, b], i) => {
-      const x = 0.5 + i * 2.3;
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.75, w: 2.05, h: 2.3, rectRadius: 0.08, fill: { color: GREEN2 }, line: { color: GREEN2 } });
-      badge(s, n, x + 0.2, 1.95, 0.6, true);
-      T(s, h, { x: x + 0.2, y: 2.68, w: 1.7, h: 0.32, fontSize: 15, bold: true, color: CREAM });
-      T(s, b, { x: x + 0.2, y: 3.02, w: 1.7, h: 0.95, fontSize: 11, color: SAGE });
-      if (i < 3) s.addText("›", { x: x + 2.05, y: 2.65, w: 0.25, h: 0.4, fontSize: 22, color: ORANGE, align: "center", margin: 0, isTextBox: true });
+      const y = 1.62 + i * 0.86;
+      badge(s, n, 4.45, y + 0.04, 0.52, true);
+      T(s, h, { x: 5.15, y, w: 4.35, h: 0.28, fontSize: 14, bold: true, color: CREAM });
+      T(s, b, { x: 5.15, y: y + 0.29, w: 4.35, h: 0.5, fontSize: 11, color: SAGE });
     });
-    T(s, "Why it matters: each new app launches faster and cheaper than the last, and AppForge's market data picks where to build. Investor money goes into apps people already want.", {
-      x: 0.5, y: 4.3, w: 9, h: 0.75, fontFace: HEAD, italic: true, fontSize: 13.5, color: CREAM });
     footer(s, true);
-    s.addNotes("AppForge is our proprietary engine. It analyzes the market to find which apps fit best right now, then we build on our existing stack. PastorAI and Ready Room prove the build side works. The next eight apps will be chosen from AppForge's market analysis, not guesswork.");
+    s.addNotes("AppForge is our proprietary engine, shown here. It covers the whole path from idea to launch. It analyzes the market (Top 100 Apps, Market Analysis, Opportunities), scores ideas by app type with a Viability Scorer, sets up the tech stack and build, then produces the store listing and one-to-many marketing: emails, social posts, ads and presentations. PastorAI and Ready Room prove the build side works. The next eight apps will be chosen from AppForge's market analysis, not guesswork, and each launches faster and cheaper than the last.");
   }
 
   // ---------- 8. Traction & Metrics ----------
@@ -242,7 +250,7 @@ async function icon(name, color) {
     const s = light();
     eyebrow(s, "Traction & Metrics");
     title(s, "Built, shipped and live, before raising a dollar");
-    const stats = [["2", "AI apps live and selling"], ["3", "platforms: iOS, Android, web"], ["~30", "trial members across both apps"], ["Pre-revenue", "$0 MRR today · team of 1 · launched 2026"]];
+    const stats = [["2", "AI apps live and selling"], ["3", "platforms: iOS · Android · web"], ["~30", "trial members across both apps"], ["Pre-revenue", "$0 MRR today · team of 1 · launched 2026"]];
     stats.forEach(([big, small], i) => statCard(s, 0.5 + i * 2.3, 1.6, 2.05, 1.12, big, small, i === 3, i === 3 ? 19 : 30));
     // Milestones achieved
     card(s, 0.5, 2.95, 4.35, 2.05);
@@ -290,6 +298,30 @@ async function icon(name, color) {
       x: 0.5, y: 4.8, w: 9, h: 0.36, fontSize: 8.5, italic: true, color: MUTED });
     footer(s);
     s.addNotes("Bottom-up sizing at our current prices. Congregations: roughly 300,000 to 380,000 in the U.S. (Hartford Institute for Religion Research; U.S. Religion Census). Sales reps: about 1.5 million U.S. wholesale and manufacturing sales representatives (Bureau of Labor Statistics), before counting insurance, real estate and other sales roles. SAM assumes about 30% are reachable through self-serve digital channels. SOM is 1% of SAM over three years.");
+  }
+
+  // ---------- 9b. Why now ----------
+  {
+    const s = light();
+    eyebrow(s, "Market Opportunity  ·  Why now & customer segments");
+    title(s, "Why the timing is right");
+    const cards = [["LuZap", "AI got affordable", "The cost of running language and voice AI has fallen sharply since 2023, so $29–$47/month apps can earn healthy margins."],
+      ["LuBrain", "People expect AI help", "Most professionals have now tried AI chat, and found it doesn't fit their daily work. That gap is where focused apps win."],
+      ["LuRocket", "Small studios can ship fast", "App stores give global distribution and billing on day one, and AppForge lets one team launch app after app."]];
+    cards.forEach(([n, h, b], i) => {
+      const x = 0.5 + i * 3.07;
+      card(s, x, 1.6, 2.85, 2.2);
+      badge(s, n, x + 0.25, 1.8, 0.55);
+      T(s, h, { x: x + 0.25, y: 2.5, w: 2.4, h: 0.3, fontFace: HEAD, fontSize: 14.5, bold: true, color: GREEN });
+      T(s, b, { x: x + 0.25, y: 2.85, w: 2.4, h: 0.9, fontSize: 11, color: MUTED });
+    });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 4.0, w: 9, h: 1.0, rectRadius: 0.08, fill: { color: TAN }, line: { color: TAN } });
+    T(s, [
+      { text: "Customer segments: ", options: { bold: true } },
+      { text: "(1) pastors and staff at small and mid-size churches; (2) individual B2B sales reps and small sales teams; (3) sales managers and church networks buying group plans; (4) new niches chosen by AppForge." },
+    ], { x: 0.75, y: 4.08, w: 8.5, h: 0.84, fontSize: 12, color: GREEN, valign: "middle" });
+    footer(s);
+    s.addNotes("Why now: AI costs have dropped enough to support affordable subscription apps; professionals have tried generic AI and want tools built for their work; and app stores plus AppForge let a small studio launch quickly. Our customer segments start with pastors and church staff and individual sales reps, expand to group plans, and then to new niches chosen by AppForge.");
   }
 
   // ---------- 10. Business model ----------
@@ -353,8 +385,8 @@ async function icon(name, color) {
     const data = [hdr.map((h, i) => cell(h, { bold: true, fontSize: 10, color: i === 4 ? CREAM : GREEN, fill: { color: i === 4 ? GREEN : TAN }, align: i ? "center" : "left" }))]
       .concat(rows.map(r => r.map((c, i) => cell(c, { align: i ? "center" : "left", bold: i === 4, color: i === 4 ? GREEN : INK, fill: { color: i === 4 ? "E3EDE3" : WHITE } }))));
     s.addTable(data, { x: 0.5, y: 1.55, w: 9, colW: [2.5, 1.55, 1.75, 1.85, 1.35], rowH: [0.72, 0.4, 0.4, 0.4, 0.4, 0.4], border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.08, 0, 0.08] });
-    T(s, "Our edge: focus and speed. We go deep on niches the big platforms ignore, at a price individuals pay without a sales call, and AppForge keeps adding new ones.", {
-      x: 0.5, y: 4.5, w: 9, h: 0.55, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
+    T(s, [{ text: "Our advantages: ", options: { bold: true } }, { text: "focus on niches big platforms ignore · self-serve pricing individuals can afford · AppForge speed to new markets · a shared platform that lowers each app's cost · a founder with both the technical and sales background." }], {
+      x: 0.5, y: 4.45, w: 9, h: 0.6, fontSize: 11.5, color: GREEN });
     footer(s);
     s.addNotes("People can use general chatbots, but they have to do the prompting and still get generic output. Ministry software such as Logos focuses on study and research, and tools like Pulpit AI focus on repurposing sermon content. Sales role-play platforms such as Second Nature and Hyperbound are sold to company sales teams. We sit in between: purpose-built, affordable, self-serve, and quick to launch in new niches.");
   }
@@ -407,10 +439,46 @@ async function icon(name, color) {
     s.addNotes("Our 18-month goal is ten live apps and about 1,000 paying subscribers across the portfolio. At a blended price near $38 that's roughly $38K a month in recurring revenue, which positions us for a seed round on proven traction. These are targets, not guarantees.");
   }
 
+  // ---------- 14b. Financial projections ----------
+  {
+    const s = light();
+    eyebrow(s, "Financial Projections  ·  5-year plan");
+    title(s, "Profitable in year 3, ~$4.8M revenue by year 5");
+    const yrs = ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"];
+    const subs = [650, 2000, 4500, 8000, 13000];
+    const rev = [128, 604, 1482, 2850, 4788];
+    const cogs = rev.map(r => Math.round(r * 0.27));
+    const opex = [200, 560, 900, 1400, 2000];
+    const net = rev.map((r, i) => r - cogs[i] - opex[i]);
+    const k = v => (v < 0 ? "−$" : "$") + (Math.abs(v) >= 1000 ? (Math.abs(v) / 1000).toFixed(2) + "M" : Math.abs(v) + "K");
+    const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 10.5, color: INK, valign: "middle", align: "center" }, o) });
+    const data = [[cell("($, per year)", { bold: true, color: GREEN, fill: { color: TAN }, align: "left" })].concat(yrs.map(y => cell(y, { bold: true, color: CREAM, fill: { color: GREEN } })))];
+    const row = (label, vals, o = {}) => [cell(label, { align: "left", fill: { color: WHITE }, bold: !!o.bold })].concat(vals.map(v => cell(v, Object.assign({ fill: { color: WHITE } }, o))));
+    data.push(row("Paying subscribers (year-end)", subs.map(v => v.toLocaleString("en-US"))));
+    data.push(row("Revenue", rev.map(k)));
+    data.push(row("Cost of revenue (~27%)", cogs.map(k)));
+    data.push(row("Operating expenses", opex.map(k)));
+    data.push(row("Net income", net.map(k), { bold: true, color: GREEN }));
+    s.addTable(data, { x: 0.5, y: 1.55, w: 5.6, colW: [1.95, 0.73, 0.73, 0.73, 0.73, 0.73], rowH: 0.38, border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.06, 0, 0.06] });
+    s.addChart(pres.charts.BAR, [
+      { name: "Revenue", labels: yrs.map(y => y.replace("Year ", "Y")), values: rev },
+      { name: "Total expenses", labels: yrs.map(y => y.replace("Year ", "Y")), values: rev.map((r, i) => cogs[i] + opex[i]) },
+    ], { x: 6.3, y: 1.45, w: 3.25, h: 2.55, barDir: "col", chartColors: [GREEN, ORANGE], showTitle: true, title: "Revenue vs. expenses ($K)",
+      titleFontSize: 10, titleColor: GREEN, titleFontFace: BODY, showLegend: true, legendPos: "b", legendFontSize: 8, legendColor: MUTED,
+      catAxisLabelColor: MUTED, valAxisLabelColor: MUTED, valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
+      valGridLine: { color: "E5DDC8", size: 0.5 }, catGridLine: { style: "none" }, barGapWidthPct: 50 });
+    T(s, "Key assumptions", { x: 0.5, y: 4.0, w: 5.6, h: 0.25, fontSize: 11, bold: true, color: ORANGE });
+    T(s, "Blended price ~$38/month · 15% app-store fee + ~12% AI & hosting · ~5% monthly churn · new apps launch per the roadmap · $250K pre-seed now, seed round around month 18 to fund year-2 growth · break-even during year 3.", {
+      x: 0.5, y: 4.27, w: 9, h: 0.6, fontSize: 10.5, color: MUTED });
+    T(s, "Projections, not guarantees.", { x: 6.3, y: 4.02, w: 3.25, h: 0.22, fontSize: 9, italic: true, color: MUTED, align: "right" });
+    footer(s);
+    s.addNotes("Five-year projections, built bottom-up from subscribers. Year-end paying subscribers grow from 650 to 13,000 as AppForge adds apps. Revenue uses a blended price of about $38 a month. Cost of revenue is about 27%: the 15% app-store fee plus about 12% for AI and hosting. Operating expenses cover marketing, contractors and later hires. We expect losses in years 1 and 2, funded by this round and a seed round, and to break even during year 3. These are projections, not guarantees.");
+  }
+
   // ---------- 15. Team ----------
   {
     const s = light();
-    eyebrow(s, "Team");
+    eyebrow(s, "Team & Founders");
     title(s, "A founder who knows these customers first-hand");
     card(s, 0.5, 1.6, 4.4, 3.4);
     badge(s, "LuUser", 0.8, 1.82, 0.8);
@@ -452,7 +520,8 @@ async function icon(name, color) {
       s.addImage({ data: ic[n].o, x: 6.75, y: y + 0.04, w: 0.24, h: 0.24 });
       T(s, t, { x: 7.1, y, w: 2.3, h: 0.32, fontSize: 11, color: CREAM, valign: "middle" });
     });
-    T(s, "Pre-seed · Terms open to discussion (SAFE or priced)", { x: 0.5, y: 4.55, w: 5.6, h: 0.3, fontSize: 11, italic: true, color: SAGE });
+    T(s, "Use of funds: 40% marketing · 30% building 8 new apps · 10% AI infrastructure · 10% operations · 10% runway", { x: 0.5, y: 4.2, w: 5.6, h: 0.45, fontSize: 11, color: CREAM });
+    T(s, "Pre-seed · $250,000 · Terms open to discussion (SAFE or priced)", { x: 0.5, y: 4.7, w: 5.6, h: 0.3, fontSize: 11, italic: true, color: SAGE });
     footer(s, true);
     s.addNotes("We're raising $250K pre-seed. It lets us scale the two apps already in market and launch eight more that AppForge identifies. Thank you. I'd love to show you a live demo of PastorAI and Ready Room.");
   }
