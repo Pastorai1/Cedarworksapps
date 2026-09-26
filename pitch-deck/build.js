@@ -269,12 +269,12 @@ async function icon(name, color) {
     eyebrow(s, "Market Opportunity");
     title(s, "A ~$690M U.S. market for our first two apps");
     // Nested circles: TAM > SAM > SOM
-    s.addShape(pres.shapes.OVAL, { x: 0.5, y: 1.6, w: 3.4, h: 3.4, fill: { color: TAN }, line: { color: TAN } });
-    s.addShape(pres.shapes.OVAL, { x: 1.15, y: 2.5, w: 2.1, h: 2.1, fill: { color: SAGE }, line: { color: SAGE } });
-    s.addShape(pres.shapes.OVAL, { x: 1.7, y: 3.55, w: 1.0, h: 1.0, fill: { color: GREEN }, line: { color: GREEN } });
-    T(s, "TAM ~$690M", { x: 0.5, y: 1.85, w: 3.4, h: 0.3, fontSize: 13, bold: true, color: GREEN, align: "center" });
-    T(s, "SAM ~$207M", { x: 1.15, y: 2.8, w: 2.1, h: 0.3, fontSize: 12, bold: true, color: GREEN, align: "center" });
-    T(s, "SOM\n~$2M", { x: 1.7, y: 3.75, w: 1.0, h: 0.6, fontSize: 10.5, bold: true, color: CREAM, align: "center" });
+    s.addShape(pres.shapes.OVAL, { x: 0.6, y: 1.55, w: 3.1, h: 3.1, fill: { color: TAN }, line: { color: TAN } });
+    s.addShape(pres.shapes.OVAL, { x: 1.175, y: 2.55, w: 1.95, h: 1.95, fill: { color: SAGE }, line: { color: SAGE } });
+    s.addShape(pres.shapes.OVAL, { x: 1.675, y: 3.45, w: 0.95, h: 0.95, fill: { color: GREEN }, line: { color: GREEN } });
+    T(s, "TAM ~$690M", { x: 0.6, y: 1.8, w: 3.1, h: 0.3, fontSize: 13, bold: true, color: GREEN, align: "center" });
+    T(s, "SAM ~$207M", { x: 1.175, y: 2.8, w: 1.95, h: 0.3, fontSize: 12, bold: true, color: GREEN, align: "center" });
+    T(s, "SOM\n~$2M", { x: 1.675, y: 3.63, w: 0.95, h: 0.6, fontSize: 10.5, bold: true, color: CREAM, align: "center" });
     const rows = [
       ["TAM: total addressable", "300K+ U.S. congregations × $564/yr (≈ $169M), plus ~1.5M U.S. B2B sales reps × $348/yr (≈ $522M)."],
       ["SAM: serviceable", "The ~30% we can reach with digital, self-serve sales: small and mid-size churches, and individual reps and small teams."],
@@ -282,10 +282,12 @@ async function icon(name, color) {
       ["Expansion", "Each of the 8 AppForge apps adds a new market on top of these two."],
     ];
     rows.forEach(([h, b], i) => {
-      const y = 1.6 + i * 0.85;
+      const y = 1.55 + i * 0.8;
       T(s, h, { x: 4.3, y, w: 5.2, h: 0.27, fontSize: 13, bold: true, color: GREEN });
       T(s, b, { x: 4.3, y: y + 0.28, w: 5.2, h: 0.52, fontSize: 11, color: MUTED });
     });
+    T(s, "Sources: Hartford Institute for Religion Research & U.S. Religion Census (congregations); U.S. Bureau of Labor Statistics, Occupational Employment & Wage Statistics (sales representatives, wholesale & manufacturing). Prices: current PastorAI and Ready Room plans.", {
+      x: 0.5, y: 4.8, w: 9, h: 0.36, fontSize: 8.5, italic: true, color: MUTED });
     footer(s);
     s.addNotes("Bottom-up sizing at our current prices. Congregations: roughly 300,000 to 380,000 in the U.S. (Hartford Institute for Religion Research; U.S. Religion Census). Sales reps: about 1.5 million U.S. wholesale and manufacturing sales representatives (Bureau of Labor Statistics), before counting insurance, real estate and other sales roles. SAM assumes about 30% are reachable through self-serve digital channels. SOM is 1% of SAM over three years.");
   }
