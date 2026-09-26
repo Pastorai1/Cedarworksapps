@@ -28,6 +28,7 @@ async function icon(name, color) {
   pres.author = "James Chambers";
   pres.company = "Cedarworks Apps LLC";
   pres.title = "Cedarworks Apps — Investor Pitch Deck";
+  pres.subject = "Pre-seed pitch deck: problem statement, solution & product, traction & metrics, market opportunity, business model, competitive landscape, team, use of funds";
 
   const cedar = await svgPng(CEDAR);
   const ic = {};
@@ -38,7 +39,7 @@ async function icon(name, color) {
     ic[n] = { o: await icon(n, ORANGE), g: await icon(n, GREEN), c: await icon(n, CREAM) };
   }
 
-  const TOTAL = 15;
+  const TOTAL = 16;
   let num = 0;
 
   // Brand motif: icon inside an orange-outlined circle (mirrors the logo mark)
@@ -54,14 +55,14 @@ async function icon(name, color) {
   }
   function footer(s, dark) {
     num++;
-    s.addText("CEDARWORKS APPS  ·  CONFIDENTIAL", { x: 0.5, y: 5.22, w: 5, h: 0.25, fontFace: BODY, fontSize: 8,
-      color: dark ? SAGE : MUTED, charSpacing: 2, margin: 0, isTextBox: true });
+    s.addText("Cedarworks Apps  ·  Confidential", { x: 0.5, y: 5.22, w: 5, h: 0.25, fontFace: BODY, fontSize: 8,
+      color: dark ? SAGE : MUTED, margin: 0, isTextBox: true });
     s.addText(`${num} / ${TOTAL}`, { x: 8.5, y: 5.22, w: 1, h: 0.25, fontFace: BODY, fontSize: 8, align: "right",
       color: dark ? SAGE : MUTED, margin: 0, isTextBox: true });
   }
   function eyebrow(s, text, y = 0.42, dark = false) {
-    s.addText(text.toUpperCase(), { x: 0.5, y, w: 9, h: 0.26, fontFace: BODY, fontSize: 10, bold: true,
-      color: ORANGE, charSpacing: 3, margin: 0, isTextBox: true });
+    s.addText(text, { x: 0.5, y, w: 9, h: 0.26, fontFace: BODY, fontSize: 11, bold: true,
+      color: ORANGE, margin: 0, isTextBox: true });
   }
   function title(s, text, dark = false, y = 0.68, size = 26) {
     s.addText(text, { x: 0.5, y, w: 9, h: 0.88, fontFace: HEAD, fontSize: size, bold: true,
@@ -75,18 +76,24 @@ async function icon(name, color) {
   }
   const T = (s, text, o) => s.addText(text, Object.assign({ fontFace: BODY, fontSize: 13, color: INK, margin: 0, valign: "top", isTextBox: true }, o));
 
+  const bullets = (arr) => arr.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < arr.length - 1 } }));
+  function statCard(s, x, y, w, h, big, small, hi, bigSize = 28) {
+    card(s, x, y, w, h, hi ? GREEN : WHITE);
+    T(s, big, { x: x + 0.22, y: y + 0.1, w: w - 0.4, h: 0.5, fontFace: HEAD, fontSize: bigSize, bold: true, color: hi ? CREAM : GREEN, valign: "middle" });
+    T(s, small, { x: x + 0.22, y: y + 0.6, w: w - 0.4, h: h - 0.65, fontSize: 11, color: hi ? SAGE : MUTED });
+  }
+
   // ---------- 1. Title ----------
   {
     const s = dark();
     logo(s, 0.5, 0.55, 0.8);
-    s.addText("CEDARWORKS APPS", { x: 1.5, y: 0.72, w: 5, h: 0.45, fontFace: BODY, fontSize: 14, bold: true, color: CREAM, charSpacing: 4, margin: 0, isTextBox: true });
+    s.addText("CEDARWORKS APPS", { x: 1.5, y: 0.72, w: 5, h: 0.45, fontFace: BODY, fontSize: 15, bold: true, color: CREAM, margin: 0, isTextBox: true });
     s.addText("Practical AI apps,\nbuilt to do real work.", { x: 0.5, y: 1.65, w: 6.6, h: 1.7, fontFace: HEAD, fontSize: 40, bold: true, color: CREAM, margin: 0, valign: "top", isTextBox: true });
     s.addText("A small studio shipping focused, subscription AI apps: two live in the app stores today, and AppForge to build the next eight.", {
       x: 0.5, y: 3.45, w: 6.2, h: 0.75, fontFace: HEAD, italic: true, fontSize: 15, color: SAGE, margin: 0, valign: "top", isTextBox: true });
-    // Ask chip
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 7.2, y: 1.7, w: 2.3, h: 1.55, rectRadius: 0.1, fill: { color: GREEN2 }, line: { color: ORANGE, width: 1.25 } });
     s.addText([
-      { text: "PRE-SEED ROUND", options: { fontSize: 9, bold: true, color: ORANGE, charSpacing: 2, breakLine: true } },
+      { text: "Pre-seed round", options: { fontSize: 10, bold: true, color: ORANGE, breakLine: true } },
       { text: "$250K", options: { fontSize: 36, bold: true, color: CREAM, fontFace: HEAD, breakLine: true } },
       { text: "Springfield, MO", options: { fontSize: 11, color: SAGE } },
     ], { x: 7.2, y: 1.8, w: 2.3, h: 1.35, fontFace: BODY, align: "center", valign: "middle", margin: 0, isTextBox: true });
@@ -96,103 +103,121 @@ async function icon(name, color) {
     s.addNotes("Cedarworks Apps is a Springfield, Missouri AI app studio. We build focused, subscription AI apps for specific professions. Two are live in the Apple App Store and Google Play today. We're raising a $250K pre-seed round to market them and use our in-house AppForge engine to launch eight more.");
   }
 
-  // ---------- 2. Problem ----------
+  // ---------- 2. Executive summary ----------
   {
     const s = light();
-    eyebrow(s, "The problem");
-    title(s, "Busy professionals get generic AI, not tools built for their job");
-    const rows = [
-      ["LuClock", "Pastors are stretched thin", "Sermons, Bible studies, devotionals, kids' ministry, social posts and translation fill the week. Most of it starts from a blank page, spread across a dozen tabs."],
-      ["LuTarget", "Sales reps practice on real prospects", "Discovery and objection-handling are learned live, on the calls that matter. Every fumbled objection is a lost deal and lost commission."],
-      ["LuBrain", "General chatbots don't close the gap", "A blank chat box doesn't know the workflow, the vocabulary or what 'good' looks like. People give up or spend more time prompting than working."],
+    eyebrow(s, "Executive Summary");
+    title(s, "Cedarworks Apps at a glance");
+    const items = [
+      ["Problem Statement", "Pastors and salespeople lose hours to repetitive prep and unpracticed skills. Generic AI doesn't fit their work."],
+      ["Solution & Product", "Focused AI apps: PastorAI ($47/mo) for ministry and Ready Room ($29/mo) for sales-call practice."],
+      ["Traction & Metrics", "Both apps live on iOS, Android and web; ~30 trial members; pre-revenue, launched in 2026."],
+      ["Market Opportunity", "~$690M U.S. TAM across 300K+ churches and ~1.5M B2B sales reps; 8 more apps widen it."],
+      ["Business Model", "Monthly subscriptions, ~68–77% estimated gross margin, target LTV:CAC of 3:1 or better."],
+      ["Competitive Landscape", "Cheaper and more focused than enterprise tools, more useful than generic chatbots."],
+      ["Team", "Founder James Chambers: computer science degree, 40+ years in sales, built both apps."],
+      ["The Ask", "$250K pre-seed for about 18 months: grow the two apps and launch 8 more with AppForge."],
     ];
-    rows.forEach(([n, h, b], i) => {
-      const y = 1.75 + i * 1.08;
-      badge(s, n, 0.5, y, 0.62);
-      T(s, h, { x: 1.35, y: y - 0.02, w: 7.9, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true, color: GREEN });
-      T(s, b, { x: 1.35, y: y + 0.33, w: 7.9, h: 0.6, fontSize: 12.5, color: MUTED });
+    items.forEach(([h, b], i) => {
+      const col = i % 2, row = Math.floor(i / 2);
+      const x = 0.5 + col * 4.6, y = 1.55 + row * 0.9;
+      card(s, x, y, 4.4, 0.78);
+      T(s, h, { x: x + 0.2, y: y + 0.09, w: 4.0, h: 0.24, fontSize: 11, bold: true, color: ORANGE });
+      T(s, b, { x: x + 0.2, y: y + 0.33, w: 4.0, h: 0.42, fontSize: 10.5, color: INK });
     });
     footer(s);
-    s.addNotes("Our customers are skilled professionals whose days are full of repeatable work that AI could help with. Generic AI tools make them do the translating. Pastors need ministry-shaped help. Sales reps need a safe place to practice before a real call.");
+    s.addNotes("A one-slide summary of the whole deck, in the same order investors score it: problem, solution, traction, market, business model, competition, team and the ask.");
   }
 
-  // ---------- 3. Solution ----------
+  // ---------- 3. Problem ----------
+  {
+    const s = light();
+    eyebrow(s, "Problem Statement");
+    title(s, "Generic AI doesn't fit how pastors and reps work");
+    const rows = [
+      ["LuClock", "Pastors are overloaded", "Sermons, Bible studies, devotionals, kids' ministry, social posts and translation fill the week, often for a pastor with little or no staff. Most of it starts from a blank page."],
+      ["LuTarget", "Sales reps practice on real prospects", "Discovery and objection-handling are learned live, on the calls that matter. Every fumbled objection costs a deal and a commission."],
+      ["LuBrain", "General chatbots don't close the gap", "A blank chat box doesn't know the workflow, the vocabulary or what 'good' looks like, so people spend more time prompting than working."],
+    ];
+    rows.forEach(([n, h, b], i) => {
+      const y = 1.65 + i * 0.84;
+      badge(s, n, 0.5, y, 0.56);
+      T(s, h, { x: 1.3, y: y - 0.02, w: 8.2, h: 0.3, fontFace: HEAD, fontSize: 15.5, bold: true, color: GREEN });
+      T(s, b, { x: 1.3, y: y + 0.3, w: 8.2, h: 0.48, fontSize: 11.5, color: MUTED });
+    });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 4.25, w: 9, h: 0.78, rectRadius: 0.08, fill: { color: TAN }, line: { color: TAN } });
+    T(s, [
+      { text: "Why we know this problem: ", options: { bold: true } },
+      { text: "Founder James Chambers watched the weekly workload his bishop carried, and spent 40+ years in sales watching reps learn objection-handling on live deals." },
+    ], { x: 0.75, y: 4.33, w: 8.5, h: 0.62, fontSize: 12, color: GREEN, valign: "middle" });
+    footer(s);
+    s.addNotes("The problem: skilled professionals spend hours every week on repeatable work that AI could speed up, but generic AI makes them do the translating. Pastors carry a week of writing and teaching prep, often alone. Sales reps have nowhere safe to practice before a real call. I've seen both first-hand: my bishop's workload, and 40 years of selling.");
+  }
+
+  // ---------- 4. Solution ----------
   {
     const s = dark();
-    eyebrow(s, "Our solution");
+    eyebrow(s, "Solution & Product");
     title(s, "Focused AI apps that each do one job really well", true);
     T(s, "Cedarworks Apps builds niche, subscription AI apps: one profession, one clear job, a running start in seconds. Each app has its own workflow, prompts and guardrails, so users get results instead of a blank chat box.", {
       x: 0.5, y: 1.7, w: 4.3, h: 1.6, fontSize: 14, color: CREAM });
     T(s, "One studio, many apps. Shared code, shared infrastructure, one founder-led team.", {
-      x: 0.5, y: 3.35, w: 4.3, h: 0.8, fontFace: HEAD, italic: true, fontSize: 14, color: SAGE });
+      x: 0.5, y: 3.45, w: 4.3, h: 0.8, fontFace: HEAD, italic: true, fontSize: 14, color: SAGE });
     const pts = [["LuTarget", "Built for one job", "Purpose-built workflows, not generic chat"],
       ["LuSmartphone", "Everywhere users are", "iOS, Android and web"],
       ["LuRepeat", "Recurring revenue", "Monthly subscriptions with free trials"],
       ["LuLayers", "A portfolio, not a bet", "Many apps spread the risk and share costs"]];
     pts.forEach(([n, h, b], i) => {
-      const y = 1.5 + i * 0.86;
+      const y = 1.6 + i * 0.86;
       badge(s, n, 5.3, y, 0.55, true);
-      T(s, h, { x: 6.05, y: y, w: 3.45, h: 0.28, fontSize: 14, bold: true, color: CREAM });
+      T(s, h, { x: 6.05, y, w: 3.45, h: 0.28, fontSize: 14, bold: true, color: CREAM });
       T(s, b, { x: 6.05, y: y + 0.28, w: 3.45, h: 0.3, fontSize: 11.5, color: SAGE });
     });
     footer(s, true);
-    s.addNotes("We don't try to build one app for everyone. We build many small apps that each serve one audience extremely well. That keeps each product simple and lets us reuse our tech across the whole portfolio.");
+    s.addNotes("We don't build one app for everyone. We build many small apps that each serve one audience extremely well. That keeps each product simple and lets us reuse our technology across the portfolio.");
   }
 
-  // ---------- 4. PastorAI ----------
+  // ---------- 5. PastorAI ----------
   {
     const s = light();
-    eyebrow(s, "Live product #1  ·  pastorai.io");
+    eyebrow(s, "Solution & Product  ·  PastorAI  ·  pastorai.io");
     title(s, "PastorAI: an AI ministry assistant for the whole week");
     card(s, 0.5, 1.6, 5.3, 3.4);
-    T(s, "Features", { x: 0.8, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE, charSpacing: 2 });
+    T(s, "Features", { x: 0.8, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
     const feats = ["Sermon and sermon-series planning", "Bible study and devotional writing", "Children's ministry lessons",
       "Church social media content", "Translation for multilingual congregations", "Output shaped to the pastor's own voice"];
-    T(s, feats.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < feats.length - 1 } })),
-      { x: 0.8, y: 2.18, w: 4.8, h: 2.1, fontSize: 13.5, paraSpaceAfter: 5 });
-    T(s, "Lightens the load without replacing the pastor: less busywork, more time with people.", {
+    T(s, bullets(feats), { x: 0.8, y: 2.12, w: 4.8, h: 2.0, fontSize: 13.5, paraSpaceAfter: 4 });
+    T(s, "“This will save me so much time. It's a great tool.”  — Pastor Dennis, trial user", {
       x: 0.8, y: 4.3, w: 4.8, h: 0.55, fontFace: HEAD, italic: true, fontSize: 12, color: GREEN });
-    // stat column
-    const stats = [["$47", "per month subscription"], ["~15", "trial members today"], ["iOS · Android · Web", "live in both app stores"]];
-    stats.forEach(([big, small], i) => {
-      const y = 1.6 + i * 1.17;
-      card(s, 6.1, y, 3.4, 1.0, i === 0 ? GREEN : WHITE);
-      T(s, big, { x: 6.35, y: y + 0.12, w: 3.0, h: 0.5, fontFace: HEAD, fontSize: i === 2 ? 17 : 28, bold: true, color: i === 0 ? CREAM : GREEN, valign: "middle" });
-      T(s, small, { x: 6.35, y: y + 0.63, w: 3.0, h: 0.28, fontSize: 11, color: i === 0 ? SAGE : MUTED });
-    });
+    const stats = [["$47", "per month subscription"], ["~15", "trial members"], ["iOS · Android · Web", "live in both app stores"]];
+    stats.forEach(([big, small], i) => statCard(s, 6.1, 1.6 + i * 1.17, 3.4, 1.0, big, small, i === 0, i === 2 ? 17 : 28));
     footer(s);
-    s.addNotes("PastorAI puts the tools that fill a pastor's week in one place. It's live on iOS, Android and the web at $47 a month, with about 15 trial members today.");
+    s.addNotes("PastorAI puts the tools that fill a pastor's week in one place. It's live on iOS, Android and the web at $47 a month, with about 15 trial members. One of them, Pastor Dennis, told us: 'This will save me so much time. It's a great tool.'");
   }
 
-  // ---------- 5. Ready Room ----------
+  // ---------- 6. Ready Room ----------
   {
     const s = light();
-    eyebrow(s, "Live product #2  ·  tryreadyroom.com");
+    eyebrow(s, "Solution & Product  ·  Ready Room  ·  tryreadyroom.com");
     title(s, "Ready Room: a flight simulator for sales calls");
-    const stats = [["$29", "per month subscription"], ["~15", "trial members today"], ["iOS · Android · Web", "live in both app stores"]];
-    stats.forEach(([big, small], i) => {
-      const y = 1.6 + i * 1.17;
-      card(s, 0.5, y, 3.4, 1.0, i === 0 ? GREEN : WHITE);
-      T(s, big, { x: 0.75, y: y + 0.12, w: 3.0, h: 0.5, fontFace: HEAD, fontSize: i === 2 ? 17 : 28, bold: true, color: i === 0 ? CREAM : GREEN, valign: "middle" });
-      T(s, small, { x: 0.75, y: y + 0.63, w: 3.0, h: 0.28, fontSize: 11, color: i === 0 ? SAGE : MUTED });
-    });
+    const stats = [["$29", "per month subscription"], ["~15", "trial members"], ["iOS · Android · Web", "live in both app stores"]];
+    stats.forEach(([big, small], i) => statCard(s, 0.5, 1.6 + i * 1.17, 3.4, 1.0, big, small, i === 0, i === 2 ? 17 : 28));
     card(s, 4.2, 1.6, 5.3, 3.4);
-    T(s, "How it works", { x: 4.5, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE, charSpacing: 2 });
+    T(s, "How it works", { x: 4.5, y: 1.8, w: 4.8, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
     const feats = ["A voice AI plays a realistic, often skeptical prospect", "It reacts to how you sell: warms up to good questions, shuts down when pushed",
       "Drills discovery and objections on price, timing and trust", "Easy, medium and hard levels",
       "An AI coach grades every session and says what to fix next"];
-    T(s, feats.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < feats.length - 1 } })),
-      { x: 4.5, y: 2.18, w: 4.8, h: 2.2, fontSize: 13, paraSpaceAfter: 5 });
-    T(s, "The best closers aren't born. They're rehearsed.", {
+    T(s, bullets(feats), { x: 4.5, y: 2.12, w: 4.8, h: 2.2, fontSize: 13, paraSpaceAfter: 4 });
+    T(s, "Designed by a founder with 40+ years in sales.", {
       x: 4.5, y: 4.45, w: 4.8, h: 0.4, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
     footer(s);
-    s.addNotes("Ready Room lets sales reps rehearse on an AI prospect that talks back out loud. Reps practice discovery and objection-handling, then get graded by an AI coach. It's live on iOS, Android and the web at $29 a month, with about 15 trial members today.");
+    s.addNotes("Ready Room lets sales reps rehearse on an AI prospect that talks back out loud. They practice discovery and objection-handling, then get graded by an AI coach. It's live on iOS, Android and the web at $29 a month, with about 15 trial members. It's built on what I learned in 40 years of selling.");
   }
 
-  // ---------- 6. AppForge ----------
+  // ---------- 7. AppForge ----------
   {
     const s = dark();
-    eyebrow(s, "Our engine");
+    eyebrow(s, "Solution & Product  ·  AppForge");
     title(s, "AppForge: our in-house system for finding and building the next app", true);
     const steps = [["LuSearch", "1  Analyze", "Scans the market for underserved niches with real demand and willingness to pay"],
       ["LuTarget", "2  Select", "Scores ideas on demand, competition and fit, and picks the strongest"],
@@ -209,118 +234,132 @@ async function icon(name, color) {
     T(s, "Why it matters: each new app launches faster and cheaper than the last, and AppForge's market data picks where to build. Investor money goes into apps people already want.", {
       x: 0.5, y: 4.3, w: 9, h: 0.75, fontFace: HEAD, italic: true, fontSize: 13.5, color: CREAM });
     footer(s, true);
-    s.addNotes("AppForge is our proprietary engine. It analyzes the market to find which apps are the best fit right now, then we build on our existing stack. PastorAI and Ready Room prove the build side works. The next eight apps will be chosen by AppForge's market analysis, not by guesswork.");
+    s.addNotes("AppForge is our proprietary engine. It analyzes the market to find which apps fit best right now, then we build on our existing stack. PastorAI and Ready Room prove the build side works. The next eight apps will be chosen from AppForge's market analysis, not guesswork.");
   }
 
-  // ---------- 7. Traction ----------
+  // ---------- 8. Traction & Metrics ----------
   {
     const s = light();
-    eyebrow(s, "Traction");
+    eyebrow(s, "Traction & Metrics");
     title(s, "Built, shipped and live, before raising a dollar");
-    const stats = [["2", "AI apps live on the\nApple App Store & Google Play"], ["~30", "trial members across\nPastorAI & Ready Room"],
-      ["2", "subscription tiers\n($47 and $29 per month)"], ["1", "founder who built and\nlaunched both apps"]];
-    stats.forEach(([big, small], i) => {
-      const x = 0.5 + i * 2.3;
-      card(s, x, 1.65, 2.05, 1.9);
-      T(s, big, { x: x + 0.15, y: 1.8, w: 1.75, h: 0.85, fontFace: HEAD, fontSize: 44, bold: true, color: GREEN, align: "center", valign: "middle" });
-      T(s, small, { x: x + 0.15, y: 2.7, w: 1.75, h: 0.7, fontSize: 11.5, color: MUTED, align: "center" });
+    const stats = [["2", "AI apps live and selling"], ["3", "platforms: iOS, Android, web"], ["~30", "trial members across both apps"], ["Pre-revenue", "launched in 2026; converting trials now"]];
+    stats.forEach(([big, small], i) => statCard(s, 0.5 + i * 2.3, 1.6, 2.05, 1.12, big, small, i === 3, i === 3 ? 19 : 30));
+    // Milestones achieved
+    card(s, 0.5, 2.95, 4.35, 2.05);
+    T(s, "Milestones achieved", { x: 0.75, y: 3.08, w: 3.9, h: 0.26, fontSize: 11, bold: true, color: ORANGE });
+    const done = ["Cedarworks Apps LLC formed (2026)", "PastorAI launched on App Store, Google Play & web",
+      "Ready Room launched on App Store, Google Play & web", "Subscription billing and free trials live", "First trial users and first testimonial"];
+    T(s, bullets(done), { x: 0.75, y: 3.38, w: 3.95, h: 1.5, fontSize: 11, paraSpaceAfter: 2 });
+    // 90-day KPI targets
+    card(s, 5.15, 2.95, 4.35, 2.05);
+    T(s, "90-day KPI targets", { x: 5.4, y: 3.08, w: 3.9, h: 0.26, fontSize: 11, bold: true, color: ORANGE });
+    const kpi = [["Paying subscribers", "75"], ["Monthly recurring revenue", "~$2,850"], ["Trial-to-paid conversion", "20%+"], ["Monthly churn", "under 6%"], ["CAC tracked per channel", "weekly"]];
+    kpi.forEach(([k, v], i) => {
+      const y = 3.4 + i * 0.3;
+      T(s, k, { x: 5.4, y, w: 2.6, h: 0.28, fontSize: 11, color: INK });
+      T(s, v, { x: 8.0, y, w: 1.3, h: 0.28, fontSize: 11, bold: true, color: GREEN, align: "right" });
     });
-    badge(s, "LuTrendingUp", 0.5, 3.95, 0.6);
-    T(s, "What's next: convert today's trial members to paid, then scale with paid acquisition. The product, stores and billing are already in place; distribution is the missing piece this round funds.", {
-      x: 1.3, y: 3.92, w: 8.2, h: 0.95, fontSize: 13.5, color: INK });
     footer(s);
-    s.addNotes("Cedarworks Apps LLC was formed in 2026. In that time we've shipped two complete AI apps to both major app stores with subscription billing, and have about 30 trial members. The product risk is largely retired. This round is about distribution.");
+    s.addNotes("We're at the very start. Both apps are complete and live on three platforms with subscription billing, and about 30 people are on free trials. We don't have paying customers yet. Our first 90-day goals are 75 paying subscribers, about $2,850 a month in recurring revenue, 20%+ trial-to-paid conversion and monthly churn under 6%. We'll report these metrics to investors every month.");
   }
 
-  // ---------- 8. Market ----------
+  // ---------- 9. Market ----------
   {
     const s = light();
-    eyebrow(s, "Market opportunity");
-    title(s, "Two large markets to start, with room for eight more");
-    card(s, 0.5, 1.6, 4.35, 3.35);
-    badge(s, "LuChurch", 0.75, 1.82, 0.55);
-    T(s, "PastorAI: churches", { x: 1.45, y: 1.9, w: 3.3, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
-    T(s, "300,000+", { x: 0.75, y: 2.55, w: 3.9, h: 0.6, fontFace: HEAD, fontSize: 34, bold: true, color: ORANGE });
-    T(s, "Protestant and independent congregations in the U.S. alone, most of them small, with few staff.", { x: 0.75, y: 3.18, w: 3.9, h: 0.55, fontSize: 12, color: MUTED });
-    T(s, "At $47/mo ($564/yr), each 1% of U.S. churches is about $1.7M in annual recurring revenue.", { x: 0.75, y: 3.85, w: 3.9, h: 0.9, fontSize: 12.5, bold: true, color: INK });
-    card(s, 5.15, 1.6, 4.35, 3.35);
-    badge(s, "LuBriefcase", 5.4, 1.82, 0.55);
-    T(s, "Ready Room: sales professionals", { x: 6.1, y: 1.9, w: 3.3, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
-    T(s, "Millions", { x: 5.4, y: 2.55, w: 3.9, h: 0.6, fontFace: HEAD, fontSize: 34, bold: true, color: ORANGE });
-    T(s, "of U.S. workers hold sales jobs, and new reps and small teams rarely get structured call practice.", { x: 5.4, y: 3.18, w: 3.9, h: 0.55, fontSize: 12, color: MUTED });
-    T(s, "At $29/mo ($348/yr), every 10,000 reps is about $3.5M in annual recurring revenue.", { x: 5.4, y: 3.85, w: 3.9, h: 0.9, fontSize: 12.5, bold: true, color: INK });
-    footer(s);
-    s.addNotes("Sources to cite if asked: the Hartford Institute for Religion Research and the U.S. Religion Census estimate roughly 300,000 to 380,000 U.S. congregations. The Bureau of Labor Statistics counts millions of U.S. workers in sales occupations. Revenue figures are simple math on our current prices, not forecasts. AppForge adds new markets with each of the next eight apps.");
-  }
-
-  // ---------- 9. Business model ----------
-  {
-    const s = light();
-    eyebrow(s, "Business model");
-    title(s, "Recurring subscriptions across a growing portfolio");
-    const cols = [["LuRepeat", "App subscriptions", "Monthly plans with free trials, billed through the App Store, Google Play and the web. PastorAI $47/mo · Ready Room $29/mo."],
-      ["LuUsers", "Group plans", "Multi-seat plans for sales teams and church staffs: a higher contract value from one buyer."],
-      ["LuWrench", "Custom AI apps", "Custom AI software built for local businesses: service revenue that helps fund the studio and brings in app ideas."]];
-    cols.forEach(([n, h, b], i) => {
-      const x = 0.5 + i * 3.07;
-      card(s, x, 1.65, 2.85, 2.35);
-      badge(s, n, x + 0.25, 1.85, 0.6);
-      T(s, h, { x: x + 0.25, y: 2.6, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 15, bold: true, color: GREEN });
-      T(s, b, { x: x + 0.25, y: 2.95, w: 2.4, h: 1.0, fontSize: 11.5, color: MUTED });
+    eyebrow(s, "Market Opportunity");
+    title(s, "A ~$690M U.S. market for our first two apps");
+    // Nested circles: TAM > SAM > SOM
+    s.addShape(pres.shapes.OVAL, { x: 0.5, y: 1.6, w: 3.4, h: 3.4, fill: { color: TAN }, line: { color: TAN } });
+    s.addShape(pres.shapes.OVAL, { x: 1.15, y: 2.5, w: 2.1, h: 2.1, fill: { color: SAGE }, line: { color: SAGE } });
+    s.addShape(pres.shapes.OVAL, { x: 1.7, y: 3.55, w: 1.0, h: 1.0, fill: { color: GREEN }, line: { color: GREEN } });
+    T(s, "TAM ~$690M", { x: 0.5, y: 1.85, w: 3.4, h: 0.3, fontSize: 13, bold: true, color: GREEN, align: "center" });
+    T(s, "SAM ~$207M", { x: 1.15, y: 2.8, w: 2.1, h: 0.3, fontSize: 12, bold: true, color: GREEN, align: "center" });
+    T(s, "SOM\n~$2M", { x: 1.7, y: 3.75, w: 1.0, h: 0.6, fontSize: 10.5, bold: true, color: CREAM, align: "center" });
+    const rows = [
+      ["TAM: total addressable", "300K+ U.S. congregations × $564/yr (≈ $169M), plus ~1.5M U.S. B2B sales reps × $348/yr (≈ $522M)."],
+      ["SAM: serviceable", "The ~30% we can reach with digital, self-serve sales: small and mid-size churches, and individual reps and small teams."],
+      ["SOM: 3-year target", "1% of SAM, or about 4,500 subscribers and ~$2M in annual recurring revenue."],
+      ["Expansion", "Each of the 8 AppForge apps adds a new market on top of these two."],
+    ];
+    rows.forEach(([h, b], i) => {
+      const y = 1.6 + i * 0.85;
+      T(s, h, { x: 4.3, y, w: 5.2, h: 0.27, fontSize: 13, bold: true, color: GREEN });
+      T(s, b, { x: 4.3, y: y + 0.28, w: 5.2, h: 0.52, fontSize: 11, color: MUTED });
     });
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 4.2, w: 9, h: 0.78, rectRadius: 0.08, fill: { color: TAN }, line: { color: TAN } });
-    T(s, "Portfolio effect: every app shares one codebase, one AI stack and one founder's overhead. Each new app adds revenue with little added fixed cost.", {
-      x: 0.75, y: 4.3, w: 8.5, h: 0.6, fontSize: 12.5, color: GREEN, valign: "middle" });
     footer(s);
-    s.addNotes("Our core revenue is monthly subscriptions. Team and church plans raise the value of each sale. Custom app work for businesses is a secondary revenue line and a source of new app ideas. Because all the apps share infrastructure, margins improve as the portfolio grows.");
+    s.addNotes("Bottom-up sizing at our current prices. Congregations: roughly 300,000 to 380,000 in the U.S. (Hartford Institute for Religion Research; U.S. Religion Census). Sales reps: about 1.5 million U.S. wholesale and manufacturing sales representatives (Bureau of Labor Statistics), before counting insurance, real estate and other sales roles. SAM assumes about 30% are reachable through self-serve digital channels. SOM is 1% of SAM over three years.");
   }
 
-  // ---------- 10. Go-to-market ----------
+  // ---------- 10. Business model ----------
   {
     const s = light();
-    eyebrow(s, "Go-to-market");
+    eyebrow(s, "Business Model");
+    title(s, "Recurring subscriptions with healthy unit economics");
+    const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 11, color: INK, valign: "middle" }, o) });
+    const hdrO = (i) => ({ bold: true, color: i ? CREAM : GREEN, fill: { color: i ? GREEN : TAN }, align: i ? "center" : "left" });
+    const rows = [["Monthly price", "$47", "$29"], ["Net after app-store fee (15%)", "$39.95", "$24.65"], ["Est. AI + hosting cost / user", "~$4", "~$5"],
+      ["Gross margin", "~77%", "~68%"], ["Lifetime value (5% churn, 20 mo)", "~$720", "~$390"], ["Target CAC (LTV:CAC ≥ 3:1)", "≤ $240", "≤ $130"], ["CAC payback", "~7 months", "~7 months"]];
+    const data = [["Unit economics (per subscriber)", "PastorAI", "Ready Room"].map((h, i) => cell(h, hdrO(i)))]
+      .concat(rows.map(r => r.map((c, i) => cell(c, { align: i ? "center" : "left", bold: i > 0, color: i ? GREEN : INK, fill: { color: WHITE } }))));
+    s.addTable(data, { x: 0.5, y: 1.6, w: 5.4, colW: [2.9, 1.25, 1.25], rowH: 0.4, border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.1, 0, 0.1] });
+    const streams = [["LuRepeat", "App subscriptions", "Monthly plans with free trials on App Store, Google Play and web"],
+      ["LuUsers", "Group plans", "Multi-seat plans for sales teams and church staffs"],
+      ["LuWrench", "Custom AI apps", "Custom builds for local businesses: service revenue and new app ideas"]];
+    streams.forEach(([n, h, b], i) => {
+      const y = 1.6 + i * 1.03;
+      badge(s, n, 6.2, y, 0.5);
+      T(s, h, { x: 6.85, y, w: 2.65, h: 0.28, fontSize: 13, bold: true, color: GREEN });
+      T(s, b, { x: 6.85, y: y + 0.28, w: 2.65, h: 0.6, fontSize: 10.5, color: MUTED });
+    });
+    T(s, "Figures after the price rows are planning assumptions, not results.", { x: 0.5, y: 4.85, w: 5.4, h: 0.25, fontSize: 9, italic: true, color: MUTED });
+    footer(s);
+    s.addNotes("Revenue comes from monthly subscriptions. Apple's Small Business Program and Google Play take 15% on subscriptions. AI and hosting costs are estimates. Lifetime value assumes 5% monthly churn, an average 20-month life, measured as gross profit. We'll hold customer acquisition cost to a third of lifetime value, which pays back in about seven months. Group plans and custom app work add revenue on top.");
+  }
+
+  // ---------- 11. Go-to-market ----------
+  {
+    const s = light();
+    eyebrow(s, "Go-to-Market Strategy");
     title(s, "How we'll turn trials into paying customers");
     card(s, 0.5, 1.6, 4.35, 3.4);
     badge(s, "LuChurch", 0.75, 1.8, 0.5);
     T(s, "PastorAI", { x: 1.4, y: 1.88, w: 3.2, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
     const pa = ["Targeted Facebook & YouTube ads to pastors and church staff", "LinkedIn outreach to ministry leaders",
       "Partnerships with denominations, church networks & seminaries", "Pastor conferences, webinars and free sermon-prep resources"];
-    T(s, pa.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < pa.length - 1 } })),
-      { x: 0.75, y: 2.5, w: 3.9, h: 2.4, fontSize: 12.5, paraSpaceAfter: 6 });
+    T(s, bullets(pa), { x: 0.75, y: 2.5, w: 3.9, h: 2.4, fontSize: 12.5, paraSpaceAfter: 6 });
     card(s, 5.15, 1.6, 4.35, 3.4);
     badge(s, "LuMegaphone", 5.4, 1.8, 0.5);
     T(s, "Ready Room", { x: 6.05, y: 1.88, w: 3.2, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
-    const rr = ["LinkedIn and short-form video ads showing live AI role-plays", "Direct outreach to sales managers for team plans",
+    const rr = ["LinkedIn and short-form video ads showing live AI role-plays", "Direct outreach to sales managers for team plans, drawing on 40 years of sales contacts",
       "Sales-trainer, coach and bootcamp affiliate partners", "App Store search optimization and referral rewards"];
-    T(s, rr.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < rr.length - 1 } })),
-      { x: 5.4, y: 2.5, w: 3.9, h: 2.4, fontSize: 12.5, paraSpaceAfter: 6 });
+    T(s, bullets(rr), { x: 5.4, y: 2.5, w: 3.9, h: 2.4, fontSize: 12.5, paraSpaceAfter: 6 });
     footer(s);
-    s.addNotes("The biggest use of funds is customer acquisition. We'll start with small, measured ad tests on each channel, then double down on the ones with the best cost per paying subscriber. Free trials are already built into both apps.");
+    s.addNotes("The biggest use of funds is customer acquisition. We'll run small, measured ad tests on each channel, then double down on the ones with the lowest cost per paying subscriber. Free trials are already built into both apps.");
   }
 
-  // ---------- 11. Competition ----------
+  // ---------- 12. Competition ----------
   {
     const s = light();
-    eyebrow(s, "Competitive landscape");
+    eyebrow(s, "Competitive Landscape");
     title(s, "Why Cedarworks wins");
-    const hdr = ["", "Generic AI chatbots", "Enterprise training / point tools", "Cedarworks apps"];
-    const rows = [["Built for one profession", "No", "Partly", "Yes"], ["Ready to use with no prompting", "No", "Partly", "Yes"],
-      ["Voice role-play & coaching (Ready Room)", "No", "Often costly", "Yes"], ["Price for individuals & small teams", "Low", "High", "Low ($29–$47)"],
-      ["New products launched quickly", "N/A", "Slow", "AppForge"]];
-    const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 12, color: INK, valign: "middle" }, o) });
-    const data = [hdr.map((h, i) => cell(h, { bold: true, color: i === 3 ? CREAM : GREEN, fill: { color: i === 3 ? GREEN : TAN }, align: i ? "center" : "left" }))]
-      .concat(rows.map(r => r.map((c, i) => cell(c, { align: i ? "center" : "left", bold: i === 3, color: i === 3 ? GREEN : INK, fill: { color: i === 3 ? "E3EDE3" : WHITE } }))));
-    s.addTable(data, { x: 0.5, y: 1.55, w: 9, colW: [3.3, 1.8, 2.1, 1.8], rowH: 0.47, border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.12, 0, 0.12] });
-    T(s, "Our moat is speed and focus: a small, efficient studio that goes deep on niches the big platforms ignore.", {
-      x: 0.5, y: 4.55, w: 9, h: 0.45, fontFace: HEAD, italic: true, fontSize: 13, color: GREEN });
+    const hdr = ["", "Generic AI chat (e.g. ChatGPT)", "Ministry software (e.g. Logos, Pulpit AI)", "Sales role-play (e.g. Second Nature, Hyperbound)", "Cedarworks apps"];
+    const rows = [["Built for one profession", "No", "Yes", "Yes", "Yes"], ["Ready to use with no prompting", "No", "Partly", "Yes", "Yes"],
+      ["Built for small churches & individual reps", "Yes", "Partly", "No (enterprise)", "Yes"], ["Self-serve monthly price", "Low", "Varies", "Sales-led", "$29–$47"],
+      ["Launches new niche products quickly", "N/A", "No", "No", "AppForge"]];
+    const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 10.5, color: INK, valign: "middle" }, o) });
+    const data = [hdr.map((h, i) => cell(h, { bold: true, fontSize: 10, color: i === 4 ? CREAM : GREEN, fill: { color: i === 4 ? GREEN : TAN }, align: i ? "center" : "left" }))]
+      .concat(rows.map(r => r.map((c, i) => cell(c, { align: i ? "center" : "left", bold: i === 4, color: i === 4 ? GREEN : INK, fill: { color: i === 4 ? "E3EDE3" : WHITE } }))));
+    s.addTable(data, { x: 0.5, y: 1.55, w: 9, colW: [2.5, 1.55, 1.75, 1.85, 1.35], rowH: [0.6, 0.42, 0.42, 0.42, 0.42, 0.42], border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.08, 0, 0.08] });
+    T(s, "Our edge: focus and speed. We go deep on niches the big platforms ignore, at a price individuals pay without a sales call, and AppForge keeps adding new ones.", {
+      x: 0.5, y: 4.5, w: 9, h: 0.55, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
     footer(s);
-    s.addNotes("People can use general chatbots, but they have to do all the prompting and still get generic output. Enterprise sales-training platforms are priced for large companies. We sit in between: purpose-built, affordable, and quick to launch in new niches.");
+    s.addNotes("People can use general chatbots, but they have to do the prompting and still get generic output. Ministry software such as Logos focuses on study and research, and tools like Pulpit AI focus on repurposing sermon content. Sales role-play platforms such as Second Nature and Hyperbound are sold to company sales teams. We sit in between: purpose-built, affordable, self-serve, and quick to launch in new niches.");
   }
 
-  // ---------- 12. Use of funds ----------
+  // ---------- 13. Use of funds ----------
   {
     const s = light();
-    eyebrow(s, "Use of funds");
+    eyebrow(s, "Use of Funds");
     title(s, "$250K to scale two apps and launch eight more");
     const funds = [["Customer acquisition: PastorAI & Ready Room ads", 100], ["Build 8 new apps with AppForge", 75],
       ["AI compute, hosting & infrastructure", 25], ["Legal, accounting & app-store operations", 25], ["Founder runway & reserve", 25]];
@@ -334,15 +373,15 @@ async function icon(name, color) {
       T(s, `$${v}K`, { x: 4.85, y, w: 0.9, h: 0.38, fontFace: HEAD, fontSize: 17, bold: true, color: GREEN, valign: "middle" });
       T(s, label, { x: 5.8, y, w: 3.7, h: 0.38, fontSize: 12.5, color: INK, valign: "middle" });
     });
-    T(s, "About 18 months of runway on a lean, founder-led cost base.", { x: 4.5, y: 4.95 - 0.25, w: 5, h: 0.3, fontSize: 11, italic: true, color: MUTED });
+    T(s, "About 18 months of runway on a lean, founder-led cost base.", { x: 4.5, y: 4.7, w: 5, h: 0.3, fontSize: 11, italic: true, color: MUTED });
     footer(s);
     s.addNotes("40% goes to customer acquisition for PastorAI and Ready Room, the fastest path to revenue. 30% funds building eight new apps with AppForge, including contract development, design and QA. The rest covers AI compute and hosting, legal and operations, and a founder runway reserve.");
   }
 
-  // ---------- 13. Roadmap ----------
+  // ---------- 14. Roadmap ----------
   {
     const s = light();
-    eyebrow(s, "18-month roadmap");
+    eyebrow(s, "Roadmap & Milestones");
     title(s, "From 2 apps to 10: milestones this round unlocks");
     const ms = [["Months 0–3", "Convert trials to paid; launch measured ad tests; add team and church plans"],
       ["Months 4–6", "Scale winning ad channels; AppForge picks and launches apps #3 and #4"],
@@ -365,44 +404,44 @@ async function icon(name, color) {
     s.addNotes("Our 18-month goal is ten live apps and about 1,000 paying subscribers across the portfolio. At a blended price near $38 that's roughly $38K a month in recurring revenue, which positions us for a seed round on proven traction. These are targets, not guarantees.");
   }
 
-  // ---------- 14. Team ----------
+  // ---------- 15. Team ----------
   {
     const s = light();
     eyebrow(s, "Team");
-    title(s, "Founder-led, with a proven ability to ship");
-    card(s, 0.5, 1.6, 4.4, 3.35);
-    badge(s, "LuUser", 0.8, 1.85, 0.85);
-    T(s, "James Chambers", { x: 1.85, y: 1.95, w: 2.9, h: 0.38, fontFace: HEAD, fontSize: 19, bold: true, color: GREEN });
-    T(s, "Founder & CEO", { x: 1.85, y: 2.33, w: 2.9, h: 0.3, fontSize: 12, color: ORANGE, bold: true });
-    const jb = ["Designed, built and launched PastorAI and Ready Room", "Shipped both to the Apple App Store and Google Play",
-      "Created AppForge, the studio's market-analysis and build engine", "Leads product, AI, marketing and customer relationships"];
-    T(s, jb.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < jb.length - 1 } })),
-      { x: 0.8, y: 2.95, w: 3.9, h: 1.9, fontSize: 12, paraSpaceAfter: 5 });
-    T(s, "Hiring with this round", { x: 5.25, y: 1.65, w: 4.2, h: 0.3, fontSize: 11, bold: true, color: ORANGE, charSpacing: 2 });
+    title(s, "A founder who knows these customers first-hand");
+    card(s, 0.5, 1.6, 4.4, 3.4);
+    badge(s, "LuUser", 0.8, 1.82, 0.8);
+    T(s, "James Chambers", { x: 1.8, y: 1.9, w: 3.0, h: 0.38, fontFace: HEAD, fontSize: 19, bold: true, color: GREEN });
+    T(s, "Founder & CEO", { x: 1.8, y: 2.28, w: 3.0, h: 0.3, fontSize: 12, color: ORANGE, bold: true });
+    const jb = ["Degree in computer science: builds the products himself",
+      "40+ years in sales across multiple industries: the customer Ready Room is built for",
+      "Started Cedarworks after seeing the workload his bishop carried, which led to PastorAI",
+      "Built and launched both apps, plus AppForge, the studio's market-analysis and build engine"];
+    T(s, bullets(jb), { x: 0.8, y: 2.75, w: 3.95, h: 2.15, fontSize: 11.5, paraSpaceAfter: 4 });
+    T(s, "Hiring with this round", { x: 5.25, y: 1.65, w: 4.2, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
     const hires = [["LuWrench", "Contract developer", "Speeds up launches of the next eight apps"],
       ["LuMegaphone", "Part-time growth marketer", "Runs paid acquisition and partnerships"],
       ["LuHandshake", "Advisors", "Ministry, sales-training and SaaS mentors"]];
     hires.forEach(([n, h, b], i) => {
       const y = 2.1 + i * 0.95;
       badge(s, n, 5.25, y, 0.55);
-      T(s, h, { x: 6.0, y: y + 0.0, w: 3.5, h: 0.28, fontSize: 14, bold: true, color: GREEN });
+      T(s, h, { x: 6.0, y, w: 3.5, h: 0.28, fontSize: 14, bold: true, color: GREEN });
       T(s, b, { x: 6.0, y: y + 0.29, w: 3.5, h: 0.3, fontSize: 11.5, color: MUTED });
     });
     footer(s);
-    s.addNotes("I'm a solo founder who has already built and shipped two AI apps to both major app stores. This round lets me add contract development and part-time marketing help so I can go faster without a heavy payroll.");
+    s.addNotes("I've spent more than 40 years in sales across different industries, so Ready Room comes from my own experience. I also have a degree in computer science, which is how I built both apps and AppForge myself. PastorAI started when I saw how much my bishop carries every week and wanted to see what I could do. This round adds contract development and part-time marketing help so I can move faster without a heavy payroll.");
   }
 
-  // ---------- 15. The Ask ----------
+  // ---------- 16. The Ask ----------
   {
     const s = dark();
     logo(s, 0.5, 0.5, 0.7);
-    eyebrow(s, "The ask", 1.45);
+    eyebrow(s, "The Ask", 1.45);
     s.addText("Raising $250K to take Cedarworks from 2 apps to 10", { x: 0.5, y: 1.75, w: 5.6, h: 1.3, fontFace: HEAD, fontSize: 28, bold: true, color: CREAM, margin: 0, valign: "top", isTextBox: true });
     const pts = ["Scale PastorAI and Ready Room with paid acquisition", "Launch 8 new market-picked apps with AppForge", "Reach ~1,000 paying subscribers in 18 months"];
-    T(s, pts.map((f, i) => ({ text: f, options: { bullet: { indent: 14 }, breakLine: i < pts.length - 1 } })),
-      { x: 0.5, y: 3.15, w: 5.6, h: 1.2, fontSize: 14, color: CREAM, paraSpaceAfter: 6 });
+    T(s, bullets(pts), { x: 0.5, y: 3.15, w: 5.6, h: 1.2, fontSize: 14, color: CREAM, paraSpaceAfter: 6 });
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.5, y: 1.5, w: 3.0, h: 3.2, rectRadius: 0.1, fill: { color: GREEN2 }, line: { color: ORANGE, width: 1.25 } });
-    T(s, "LET'S TALK", { x: 6.75, y: 1.7, w: 2.5, h: 0.3, fontSize: 10, bold: true, color: ORANGE, charSpacing: 3 });
+    T(s, "Let's talk", { x: 6.75, y: 1.7, w: 2.5, h: 0.3, fontSize: 11, bold: true, color: ORANGE });
     T(s, "James Chambers", { x: 6.75, y: 2.05, w: 2.5, h: 0.4, fontFace: HEAD, fontSize: 18, bold: true, color: CREAM });
     const contact = [["LuMail", "james@cedarworksapps.com"], ["LuPhone", "417-370-2084"], ["LuGlobe", "cedarworksapps.com"], ["LuSmartphone", "pastorai.io · tryreadyroom.com"]];
     contact.forEach(([n, t], i) => {
@@ -414,6 +453,7 @@ async function icon(name, color) {
     footer(s, true);
     s.addNotes("We're raising $250K pre-seed. It lets us scale the two apps already in market and launch eight more that AppForge identifies. Thank you. I'd love to show you a live demo of PastorAI and Ready Room.");
   }
+
 
   await pres.writeFile({ fileName: OUT });
   console.log("wrote", OUT);
