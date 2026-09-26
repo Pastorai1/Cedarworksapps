@@ -74,8 +74,23 @@ customer acquisition cost, with about 7-month payback.
 - ~30 trial members (~15 per app).
 - First testimonial: "This will save me so much time. It's a great tool."
   (Pastor Dennis, trial user)
+- Current MRR: $0. Team size: 1 (founder).
 - 90-day targets: 75 paying subscribers, ~$2,850 MRR, 20%+ trial-to-paid
   conversion, monthly churn under 6%.
+
+## Competitive landscape  [slide 12]
+
+- Direct competitors: ministry software (e.g. Logos and Pulpit AI) and AI
+  sales role-play platforms (e.g. Second Nature and Hyperbound).
+- Indirect competitors: general-purpose AI chatbots such as ChatGPT.
+
+How we differ: general chatbots make users do the prompting and still give
+generic results. Ministry tools focus on study, research or repurposing
+content. Sales role-play platforms are sold to enterprise sales teams through
+a sales process. Cedarworks apps are purpose-built for one profession, ready to
+use with no prompting, and self-serve at $29–$47 a month for small churches and
+individual reps. AppForge lets us launch new niche apps faster than larger
+competitors.
 
 ## Team  [slide 15]
 

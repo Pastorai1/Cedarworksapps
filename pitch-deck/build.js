@@ -111,10 +111,10 @@ async function icon(name, color) {
     const items = [
       ["Problem Statement", "Pastors and salespeople lose hours to repetitive prep and unpracticed skills. Generic AI doesn't fit their work."],
       ["Solution & Product", "Focused AI apps: PastorAI ($47/mo) for ministry and Ready Room ($29/mo) for sales-call practice."],
-      ["Traction & Metrics", "Both apps live on iOS, Android and web; ~30 trial members; pre-revenue, launched in 2026."],
+      ["Traction & Metrics", "Both apps live on iOS, Android and web; ~30 trial users; $0 MRR (pre-revenue); team of 1."],
       ["Market Opportunity", "~$690M U.S. TAM across 300K+ churches and ~1.5M B2B sales reps; 8 more apps widen it."],
       ["Business Model", "Monthly subscriptions, ~68–77% estimated gross margin, target LTV:CAC of 3:1 or better."],
-      ["Competitive Landscape", "Cheaper and more focused than enterprise tools, more useful than generic chatbots."],
+      ["Competitive Landscape", "Direct: ministry software, sales role-play platforms. Indirect: ChatGPT. We win on focus and price."],
       ["Team", "Founder James Chambers: computer science degree, 40+ years in sales, built both apps."],
       ["The Ask", "$250K pre-seed for about 18 months: grow the two apps and launch 8 more with AppForge."],
     ];
@@ -132,7 +132,7 @@ async function icon(name, color) {
   // ---------- 3. Problem ----------
   {
     const s = light();
-    eyebrow(s, "Problem Statement");
+    eyebrow(s, "Problem Statement  ·  Customer pain points");
     title(s, "Generic AI doesn't fit how pastors and reps work");
     const rows = [
       ["LuClock", "Pastors are overloaded", "Sermons, Bible studies, devotionals, kids' ministry, social posts and translation fill the week, often for a pastor with little or no staff. Most of it starts from a blank page."],
@@ -157,7 +157,7 @@ async function icon(name, color) {
   // ---------- 4. Solution ----------
   {
     const s = dark();
-    eyebrow(s, "Solution & Product");
+    eyebrow(s, "Solution & Product  ·  What Cedarworks offers");
     title(s, "Focused AI apps that each do one job really well", true);
     T(s, "Cedarworks Apps builds niche, subscription AI apps: one profession, one clear job, a running start in seconds. Each app has its own workflow, prompts and guardrails, so users get results instead of a blank chat box.", {
       x: 0.5, y: 1.7, w: 4.3, h: 1.6, fontSize: 14, color: CREAM });
@@ -242,7 +242,7 @@ async function icon(name, color) {
     const s = light();
     eyebrow(s, "Traction & Metrics");
     title(s, "Built, shipped and live, before raising a dollar");
-    const stats = [["2", "AI apps live and selling"], ["3", "platforms: iOS, Android, web"], ["~30", "trial members across both apps"], ["Pre-revenue", "launched in 2026; converting trials now"]];
+    const stats = [["2", "AI apps live and selling"], ["3", "platforms: iOS, Android, web"], ["~30", "trial members across both apps"], ["Pre-revenue", "$0 MRR today · team of 1 · launched 2026"]];
     stats.forEach(([big, small], i) => statCard(s, 0.5 + i * 2.3, 1.6, 2.05, 1.12, big, small, i === 3, i === 3 ? 19 : 30));
     // Milestones achieved
     card(s, 0.5, 2.95, 4.35, 2.05);
@@ -295,7 +295,7 @@ async function icon(name, color) {
   // ---------- 10. Business model ----------
   {
     const s = light();
-    eyebrow(s, "Business Model");
+    eyebrow(s, "Business Model  ·  Revenue streams & unit economics");
     title(s, "Recurring subscriptions with healthy unit economics");
     const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 11, color: INK, valign: "middle" }, o) });
     const hdrO = (i) => ({ bold: true, color: i ? CREAM : GREEN, fill: { color: i ? GREEN : TAN }, align: i ? "center" : "left" });
@@ -307,8 +307,9 @@ async function icon(name, color) {
     const streams = [["LuRepeat", "App subscriptions", "Monthly plans with free trials on App Store, Google Play and web"],
       ["LuUsers", "Group plans", "Multi-seat plans for sales teams and church staffs"],
       ["LuWrench", "Custom AI apps", "Custom builds for local businesses: service revenue and new app ideas"]];
+    T(s, "Revenue streams", { x: 6.2, y: 1.6, w: 3.3, h: 0.26, fontSize: 11, bold: true, color: ORANGE });
     streams.forEach(([n, h, b], i) => {
-      const y = 1.6 + i * 1.03;
+      const y = 1.95 + i * 0.95;
       badge(s, n, 6.2, y, 0.5);
       T(s, h, { x: 6.85, y, w: 2.65, h: 0.28, fontSize: 13, bold: true, color: GREEN });
       T(s, b, { x: 6.85, y: y + 0.28, w: 2.65, h: 0.6, fontSize: 10.5, color: MUTED });
@@ -342,16 +343,16 @@ async function icon(name, color) {
   // ---------- 12. Competition ----------
   {
     const s = light();
-    eyebrow(s, "Competitive Landscape");
+    eyebrow(s, "Competitive Landscape  ·  Direct & indirect competitors");
     title(s, "Why Cedarworks wins");
-    const hdr = ["", "Generic AI chat (e.g. ChatGPT)", "Ministry software (e.g. Logos, Pulpit AI)", "Sales role-play (e.g. Second Nature, Hyperbound)", "Cedarworks apps"];
+    const hdr = ["", "Indirect: generic AI chat (e.g. ChatGPT)", "Direct: ministry software (e.g. Logos, Pulpit AI)", "Direct: sales role-play (e.g. Second Nature, Hyperbound)", "Cedarworks apps"];
     const rows = [["Built for one profession", "No", "Yes", "Yes", "Yes"], ["Ready to use with no prompting", "No", "Partly", "Yes", "Yes"],
       ["Built for small churches & individual reps", "Yes", "Partly", "No (enterprise)", "Yes"], ["Self-serve monthly price", "Low", "Varies", "Sales-led", "$29–$47"],
       ["Launches new niche products quickly", "N/A", "No", "No", "AppForge"]];
     const cell = (t, o = {}) => ({ text: t, options: Object.assign({ fontFace: BODY, fontSize: 10.5, color: INK, valign: "middle" }, o) });
     const data = [hdr.map((h, i) => cell(h, { bold: true, fontSize: 10, color: i === 4 ? CREAM : GREEN, fill: { color: i === 4 ? GREEN : TAN }, align: i ? "center" : "left" }))]
       .concat(rows.map(r => r.map((c, i) => cell(c, { align: i ? "center" : "left", bold: i === 4, color: i === 4 ? GREEN : INK, fill: { color: i === 4 ? "E3EDE3" : WHITE } }))));
-    s.addTable(data, { x: 0.5, y: 1.55, w: 9, colW: [2.5, 1.55, 1.75, 1.85, 1.35], rowH: [0.6, 0.42, 0.42, 0.42, 0.42, 0.42], border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.08, 0, 0.08] });
+    s.addTable(data, { x: 0.5, y: 1.55, w: 9, colW: [2.5, 1.55, 1.75, 1.85, 1.35], rowH: [0.72, 0.4, 0.4, 0.4, 0.4, 0.4], border: { type: "solid", pt: 0.75, color: TAN }, margin: [0, 0.08, 0, 0.08] });
     T(s, "Our edge: focus and speed. We go deep on niches the big platforms ignore, at a price individuals pay without a sales call, and AppForge keeps adding new ones.", {
       x: 0.5, y: 4.5, w: 9, h: 0.55, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
     footer(s);
