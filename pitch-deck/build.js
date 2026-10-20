@@ -493,17 +493,17 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     card(s, 0.5, 1.5, 4.4, 3.0);
     badge(s, "LuChurch", 0.75, 1.68, 0.5);
     T(s, "PastorAI", { x: 1.4, y: 1.76, w: 3.2, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
-    T(s, bullets(["Facebook and YouTube ads aimed at pastors and church staff", "LinkedIn outreach to ministry leaders",
+    T(s, bullets(["Cold email to pastors and church leaders, starting now", "Facebook, YouTube and LinkedIn aimed at pastors and church staff",
       "Partnerships with denominations, church networks and seminaries", "Conferences, webinars and free sermon-prep resources"]),
       { x: 0.75, y: 2.35, w: 3.95, h: 2.1, fontSize: 12.5, paraSpaceAfter: 5 });
     card(s, 5.1, 1.5, 4.4, 3.0);
     badge(s, "LuBriefcase", 5.35, 1.68, 0.5);
     T(s, "Ready Room", { x: 6.0, y: 1.76, w: 3.2, h: 0.35, fontFace: HEAD, fontSize: 16, bold: true, color: GREEN });
-    T(s, bullets(["LinkedIn and short videos showing live AI role-plays", "Direct outreach to sales managers for team plans",
-      "Partnerships with sales trainers, coaches and bootcamps", "App store search and referral rewards"]),
+    T(s, bullets(["Cold email to sales reps and sales managers, starting now", "LinkedIn and short videos showing live AI role-plays",
+      "Partnerships with sales trainers, coaches and bootcamps", "Team plans, app store search and referral rewards"]),
       { x: 5.35, y: 2.35, w: 3.95, h: 2.1, fontSize: 12.5, paraSpaceAfter: 5 });
-    T(s, "Powered by AppForge's marketing tools: cold emails, social posts, ads and presentations for every app.", { x: 0.5, y: 4.68, w: 9, h: 0.35, fontSize: 12.5, italic: true, color: GREEN });
-    s.addNotes("The biggest use of funds is winning customers. We'll run small, measured tests on each channel, then put more money into whichever channels win paying subscribers most cheaply. AppForge writes the emails, posts, ads and presentations, so marketing each app takes far less time.");
+    T(s, "Cold email first, to win paying customers fast: AppForge writes the campaigns, plus social posts, ads and presentations.", { x: 0.5, y: 4.68, w: 9, h: 0.35, fontSize: 12.5, italic: true, color: GREEN });
+    s.addNotes("Our first channel is cold email, starting immediately: targeted campaigns to pastors and church leaders for PastorAI, and to sales reps and sales managers for Ready Room. It's low-cost and fast, and AppForge's One-to-Many Emails tool writes the campaigns. The biggest use of funds is winning customers. Alongside cold email we'll run small, measured tests on each channel, then put more money into whichever channels win paying subscribers most cheaply. AppForge writes the emails, posts, ads and presentations, so marketing each app takes far less time.");
   }
 
   // ===================== 21. Competition =====================
@@ -529,7 +529,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     const s = light();
     eyebrow(s, "Use of Funds");
     title(s, "$450K to grow two apps and launch eight more");
-    const funds = [["Marketing and outreach for all apps", 160], ["Founder salary: 18 months full-time", 120], ["Building 8 new apps with AppForge", 90],
+    const funds = [["Marketing: cold email, ads and outreach", 160], ["Founder salary: 18 months full-time", 120], ["Building 8 new apps with AppForge", 90],
       ["AI, hosting and infrastructure", 30], ["Legal, accounting and operations", 25], ["Reserve", 25]];
     const colors = [GREEN, ORANGE, "4F7F63", "8FA98E", "B9A67A", "D9CBA6"];
     s.addChart(pres.charts.DOUGHNUT, [{ name: "Use of funds", labels: funds.map(f => f[0]), values: funds.map(f => f[1]) }], {
@@ -550,7 +550,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     const s = light();
     eyebrow(s, "Roadmap & Milestones");
     title(s, "From 2 apps to 10 in 18 months");
-    const ms = [["Months 0–3", "Turn trials into paying users; test ads; add group plans"],
+    const ms = [["Months 0–3", "Launch cold email; turn trials into paying users; test ads"],
       ["Months 4–6", "Grow the best ad channels; launch apps 3 and 4"],
       ["Months 7–12", "Launch apps 5 to 7; promote apps to each other's users"],
       ["Months 13–18", "Launch apps 8 to 10; raise a seed round to market all 10 apps at scale"]];

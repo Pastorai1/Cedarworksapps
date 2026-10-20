@@ -114,6 +114,24 @@ average ~20-month subscription, lifetime value is ~$720 (PastorAI) and ~$390
 (Ready Room). We'll spend at most a third of that to win each customer, which
 pays back in about 7 months.
 
+## Go-to-market  [slide 20]
+
+Cold email comes first, starting immediately, to win paying customers as fast
+as possible. We'll send targeted campaigns to pastors and church leaders for
+PastorAI, and to sales reps and sales managers for Ready Room. AppForge's
+One-to-Many Emails tool writes the campaigns in the founder's voice.
+
+Alongside cold email:
+- PastorAI: Facebook, YouTube and LinkedIn aimed at pastors and church staff;
+  partnerships with denominations, church networks and seminaries;
+  conferences, webinars and free sermon-prep resources.
+- Ready Room: LinkedIn and short videos showing live AI role-plays;
+  partnerships with sales trainers, coaches and bootcamps; team plans, app
+  store search and referral rewards.
+
+We'll test each channel with small budgets, then put more money into the ones
+that win paying subscribers most cheaply.
+
 ## Traction & metrics  [slide 15]
 
 - Pre-revenue: $0 MRR. Team size: 1 (founder). Founded in 2026.
@@ -142,7 +160,7 @@ niche apps faster than larger competitors.
 ## Use of funds  [slide 22]
 
 $450,000 for about 18 months:
-- $160,000: marketing and outreach for all apps
+- $160,000: marketing: cold email, ads and outreach for all apps
 - $120,000: founder salary, 18 months full-time (~$80,000/year)
 - $90,000: building 8 new apps with AppForge (contract development, design,
   testing)
@@ -171,7 +189,8 @@ Raising $450,000 pre-seed (SAFE or priced round, open to discussion) for about
 18 months of runway.
 
 Milestones:
-- Months 0–3: convert trials to paid and reach 75 paying subscribers.
+- Months 0–3: launch cold-email campaigns, convert trials to paid and reach
+  75 paying subscribers.
 - Months 4–6: grow the best ad channels and launch apps 3–4.
 - Months 7–12: launch apps 5–7.
 - Months 13–18: launch apps 8–10, reach ~1,000 paying subscribers (~$38K
