@@ -28,8 +28,8 @@ unpracticed skills, and generic AI doesn't fit their work.
 
 Pastors, often at small churches with little or no staff, write sermons, Bible
 studies, devotionals, children's lessons and social media posts every week,
-usually starting from a blank page. The load is heavy: 42% of U.S. pastors
-considered quitting full-time ministry in the past year (Barna Group, 2022).
+usually starting from a blank page. That prep leaves less time for the people
+they serve.
 
 Sales reps learn discovery and objection-handling live, on real prospects, so
 one fumbled objection can cost a deal worth thousands in commission. Structured

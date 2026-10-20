@@ -154,7 +154,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     eyebrow(s, "Problem Statement  ·  Customer pain points");
     title(s, "Generic AI doesn't fit how pastors and reps work");
     const rows = [
-      ["LuClock", "Pastors are overloaded", "Sermons, Bible studies, devotionals, kids' lessons and social posts fill every week, often with little or no staff. 42% of U.S. pastors considered quitting full-time ministry in the past year (Barna Group, 2022)."],
+      ["LuClock", "Pastors are overloaded", "Sermons, Bible studies, devotionals, kids' lessons and social posts fill every week, often with little or no staff. Most of it starts from a blank page, and it leaves little time for people."],
       ["LuTarget", "Sales reps practice on real prospects", "Reps learn to handle objections on live calls. One fumbled objection can cost a deal worth thousands in commission, and practice tools are mostly built for big companies."],
       ["LuBrain", "General chatbots don't close the gap", "Tools like ChatGPT don't know these jobs. People spend more time writing prompts than getting their work done."],
     ];
@@ -166,7 +166,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     });
     T(s, [{ text: "Why we know: ", options: { bold: true } }, { text: "founder James Chambers watched his bishop's weekly workload, and spent 40+ years in sales." }],
       { x: 0.5, y: 4.85, w: 9, h: 0.3, fontSize: 12.5, color: GREEN });
-    s.addNotes("The problem: skilled professionals spend hours every week on repeatable work that AI could speed up, but generic AI makes them do the translating. Pastors carry a week of writing and teaching prep, often alone, and burnout is high: Barna found 42% of U.S. pastors considered quitting full-time ministry in the past year. Sales reps have nowhere affordable to practice before a real call. I've seen both first-hand: my bishop's workload, and 40 years of selling.");
+    s.addNotes("The problem: skilled professionals spend hours every week on repeatable work that AI could speed up, but generic AI makes them do the translating. Pastors carry a week of writing and teaching prep, often alone, which leaves less time for their people. Sales reps have nowhere affordable to practice before a real call. I've seen both first-hand: my bishop's workload, and 40 years of selling.");
   }
 
   // ===================== 4. Solution overview =====================

@@ -33,7 +33,6 @@ business terms are explained on the slides and in the Key Terms appendix.
 - **Unit economics (slide 19):** AI/hosting cost per user and 5% monthly churn are estimates. Replace them with real numbers once you have them.
 - **Competitors (slide 21):** check the named examples and how they're described.
 - **Use of funds (slide 22) and financial projections (slide 24):** a planning model. Adjust it if your plan changes.
-- **Problem stat (slide 3):** the Barna Group 2022 figure (42% of pastors considered quitting). Confirm it before sending.
 - **Product screens (slides 6, 8, 10, 11):** recreations of the live apps, made from the founder's screenshots with personal emails removed. To use real screenshots, save them over the PNGs and rebuild.
 
 ## Rebuilding
