@@ -43,3 +43,10 @@ each slide uses the standard category name (e.g. "Problem Statement",
 npm install pptxgenjs react react-dom react-icons sharp
 node build.js Cedarworks-Apps-Pitch-Deck.pptx
 ```
+
+The committed deck lists only the office phone. To add the founder's cell number
+for a copy you send directly to investors (kept out of this public repo):
+
+```bash
+CELL_PHONE=xxx-xxx-xxxx node build.js Cedarworks-Apps-Pitch-Deck.pptx
+```

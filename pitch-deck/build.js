@@ -8,6 +8,8 @@ const I = require("react-icons/lu");
 const fs = require("fs"), path = require("path");
 
 const OUT = process.argv[2] || "Cedarworks-Apps-Pitch-Deck.pptx";
+// Optional personal cell number, kept out of the public repo: CELL_PHONE=xxx-xxx-xxxx node build.js
+const CELL = process.env.CELL_PHONE || "";
 
 // Brand palette (brand/README.md)
 const GREEN = "143D28", GREEN2 = "1E5238", CREAM = "F4EBD5", ORANGE = "D98B3C",
@@ -123,7 +125,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
       { text: "$450K", options: { fontSize: 38, bold: true, color: CREAM, fontFace: HEAD, breakLine: true } },
       { text: "Springfield, MO", options: { fontSize: 12, color: SAGE } },
     ], { x: 7.2, y: 1.78, w: 2.3, h: 1.45, fontFace: BODY, align: "center", valign: "middle", margin: 0, isTextBox: true });
-    T(s, "James Chambers, Founder  ·  james@cedarworksapps.com  ·  417-370-2084  ·  cedarworksapps.com", { x: 0.5, y: 4.6, w: 9, h: 0.3, fontSize: 12, color: CREAM });
+    T(s, "James Chambers, Founder  ·  James@cedarworksapps.com  ·  cedarworksapps.com\nOffice 417-370-2084" + (CELL ? "  ·  Cell " + CELL : ""), { x: 0.5, y: 4.45, w: 9, h: 0.55, fontSize: 12, color: CREAM, lineSpacingMultiple: 1.15 });
     s.addNotes("Cedarworks Apps is a Springfield, Missouri AI app studio. We build focused, subscription AI apps for specific professions. Two are live in the Apple App Store and Google Play today. We also built AppForge, our in-house app factory, which finds proven app ideas, writes the code and builds the marketing. We're raising a $450K pre-seed round so I can build full-time, market our two apps and launch eight more.");
   }
 
@@ -506,9 +508,9 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.5, y: 1.45, w: 3.0, h: 3.3, rectRadius: 0.1, fill: { color: GREEN2 }, line: { color: ORANGE, width: 1.25 } });
     T(s, "Let's talk", { x: 6.75, y: 1.62, w: 2.5, h: 0.3, fontSize: 13, bold: true, color: ORANGE });
     T(s, "James Chambers", { x: 6.75, y: 1.98, w: 2.5, h: 0.4, fontFace: HEAD, fontSize: 19, bold: true, color: CREAM });
-    const contact = [["LuMail", "james@cedarworksapps.com"], ["LuPhone", "417-370-2084"], ["LuGlobe", "cedarworksapps.com"], ["LuSmartphone", "pastorai.io · tryreadyroom.com"]];
+    const contact = [["LuMail", "James@cedarworksapps.com"], ["LuPhone", "Office 417-370-2084"]].concat(CELL ? [["LuSmartphone", "Cell " + CELL]] : []).concat([["LuGlobe", "cedarworksapps.com"], ["LuStore", "pastorai.io · tryreadyroom.com"]]);
     contact.forEach(([n, t], i) => {
-      const y = 2.6 + i * 0.5;
+      const y = 2.5 + i * 0.43;
       s.addImage({ data: ic[n].o, x: 6.75, y: y + 0.05, w: 0.26, h: 0.26 });
       T(s, t, { x: 7.12, y, w: 2.3, h: 0.36, fontSize: 12, color: CREAM, valign: "middle" });
     });
