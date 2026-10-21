@@ -173,7 +173,8 @@ that win paying subscribers most cheaply.
 - Pre-revenue: $0 MRR. Team size: 1 (founder). Founded in 2026.
 - Two complete AI apps (one with voice AI) shipped solo, live on 3 platforms
   (iOS, Android, web), with subscriptions and free trials working.
-- ~30 trial users (~15 per app).
+- 67 trial users: 31 on PastorAI and 36 on Ready Room, plus 2 test users
+  (one in the UK on PastorAI, one in the U.S. on Ready Room).
 - AppForge built and ready for apps 3–10.
 - First testimonial: "This will save me so much time. It's a great tool."
   (Pastor Dennis, trial user)

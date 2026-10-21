@@ -31,7 +31,7 @@ each slide uses the standard category name (e.g. "Problem Statement",
 
 ## Update before sending
 
-- **Traction (slide 8):** pre-revenue, ~30 trial users. Update with paying subscribers and MRR as they come in.
+- **Traction (slide 8):** pre-revenue; 67 trial users (31 PastorAI, 36 Ready Room) plus 2 test users. Update with paying subscribers and MRR as they come in.
 - **Unit economics (slide 28):** AI/hosting cost per user and 5% monthly churn are estimates. Replace them with real numbers once you have them.
 - **Competitors (slides 11–12):** check the named competitors (Logos, Pulpit AI, Gloo, Second Nature, Hyperbound, Gong) and how they're described.
 - **Financial projections (slide 16) and use of funds (slide 17):** a planning model. Adjust it if your plan changes.

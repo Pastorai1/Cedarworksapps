@@ -209,9 +209,9 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     T(s, leadBullets(feats), { x: 0.8, y: 2.08, w: 5.15, h: 2.3, fontSize: 13, paraSpaceAfter: 3 });
     T(s, "“This will save me so much time. It's a great tool.”  — Pastor Dennis, trial user", {
       x: 0.8, y: 4.45, w: 5.15, h: 0.5, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
-    const stats = [["$47/mo", "after a 14-day free trial"], ["~15", "trial users so far"], ["3 platforms", "iOS, Android and web"]];
+    const stats = [["$47/mo", "after a 14-day free trial"], ["31", "trial users, plus 1 test user in the UK"], ["3 platforms", "iOS, Android and web"]];
     stats.forEach(([big, small], i) => statCard(s, 6.4, 1.55 + i * 1.2, 3.1, 1.1, big, small, i === 0, i === 2 ? 22 : 26));
-    s.addNotes("PastorAI puts the tools that fill a pastor's week in one place: sermons, series planning, Bible studies, social media, devotionals, children's lessons, translation into 10 languages and sermon rehearsal. It's live on iOS, Android and the web at $47 a month after a 14-day free trial, with about 15 trial users. One of them, Pastor Dennis, told us: 'This will save me so much time. It's a great tool.'");
+    s.addNotes("PastorAI puts the tools that fill a pastor's week in one place: sermons, series planning, Bible studies, social media, devotionals, children's lessons, translation into 10 languages and sermon rehearsal. It's live on iOS, Android and the web at $47 a month after a 14-day free trial, with 31 trial users and a test user in the UK. One of them, Pastor Dennis, told us: 'This will save me so much time. It's a great tool.'");
   }
 
   // ===================== 7. Ready Room =====================
@@ -219,7 +219,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     const s = light();
     eyebrow(s, "Solution & Product  ·  Ready Room  ·  tryreadyroom.com");
     title(s, "Ready Room: a flight simulator for sales calls");
-    const stats = [["$29/mo", "or $249/year"], ["~15", "trial users so far"], ["3 platforms", "iOS, Android and web"]];
+    const stats = [["$29/mo", "or $249/year"], ["36", "trial users, plus 1 test user in the U.S."], ["3 platforms", "iOS, Android and web"]];
     stats.forEach(([big, small], i) => statCard(s, 0.5, 1.55 + i * 1.2, 3.1, 1.1, big, small, i === 0, i === 2 ? 22 : 26));
     card(s, 3.9, 1.55, 5.6, 3.5);
     T(s, "How reps practice", { x: 4.2, y: 1.72, w: 5.1, h: 0.3, fontSize: 13, bold: true, color: ORANGE });
@@ -228,7 +228,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
       ["Score real calls: ", "record live, upload a recording or paste a transcript"], ["AI coach ", "grades every session and says what to fix next"]];
     T(s, leadBullets(feats), { x: 4.2, y: 2.08, w: 5.15, h: 2.4, fontSize: 13, paraSpaceAfter: 3 });
     T(s, "Built on the founder's 40+ years in sales.", { x: 4.2, y: 4.55, w: 5.15, h: 0.4, fontFace: HEAD, italic: true, fontSize: 12.5, color: GREEN });
-    s.addNotes("Ready Room lets sales reps rehearse on an AI prospect that talks back out loud. Reps choose a drill, a difficulty and a prospect from 18+ industries, then get graded by an AI coach. They can also upload their real calls for the same scorecard. It's $29 a month or $249 a year, live on iOS, Android and the web, with about 15 trial users. It's built on what I learned in 40 years of selling.");
+    s.addNotes("Ready Room lets sales reps rehearse on an AI prospect that talks back out loud. Reps choose a drill, a difficulty and a prospect from 18+ industries, then get graded by an AI coach. They can also upload their real calls for the same scorecard. It's $29 a month or $249 a year, live on iOS, Android and the web, with 36 trial users and a test user in the U.S. It's built on what I learned in 40 years of selling.");
   }
 
   // ===================== 9. AppForge overview =====================
@@ -259,7 +259,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
     const s = light();
     eyebrow(s, "Traction & Metrics");
     title(s, "Built, shipped and live, before raising a dollar");
-    const stats = [["2", "AI apps live in the app stores"], ["3", "platforms: iOS, Android, web"], ["~30", "trial users across both apps"], ["$0 MRR", "pre-revenue · team of 1"]];
+    const stats = [["2", "AI apps live in the app stores"], ["3", "platforms: iOS, Android, web"], ["67", "trial users, plus 2 test users (UK and U.S.)"], ["$0 MRR", "pre-revenue · team of 1"]];
     stats.forEach(([big, small], i) => statCard(s, 0.5 + i * 2.3, 1.5, 2.1, 1.15, big, small, i === 3, i === 3 ? 24 : 30));
     card(s, 0.5, 2.85, 4.4, 2.2);
     T(s, "What's already proven", { x: 0.75, y: 2.98, w: 3.9, h: 0.28, fontSize: 13, bold: true, color: ORANGE });
@@ -273,7 +273,7 @@ const shot = f => "image/png;base64," + fs.readFileSync(path.join(__dirname, f))
       T(s, k, { x: 5.35, y, w: 2.9, h: 0.32, fontSize: 12.5, color: INK });
       T(s, v, { x: 8.2, y, w: 1.1, h: 0.32, fontSize: 12.5, bold: true, color: GREEN, align: "right" });
     });
-    s.addNotes("We're honest about where we are: the products are built, live on three platforms, with subscriptions and free trials working, and about 30 people on trials. We don't have paying customers yet. Proving people will pay is the first job of this round: in the next 90 days we're aiming for 75 paying subscribers, about $2,850 a month in revenue, at least 20% of trials converting and fewer than 6% of subscribers cancelling each month. We'll report these to investors monthly.");
+    s.addNotes("We're honest about where we are: the products are built, live on three platforms, with subscriptions and free trials working, and 67 people on free trials (31 on PastorAI and 36 on Ready Room), plus test users in the UK and the U.S. We don't have paying customers yet. Proving people will pay is the first job of this round: in the next 90 days we're aiming for 75 paying subscribers, about $2,850 a month in revenue, at least 20% of trials converting and fewer than 6% of subscribers cancelling each month. We'll report these to investors monthly.");
   }
 
   // ===================== Focus plan =====================
